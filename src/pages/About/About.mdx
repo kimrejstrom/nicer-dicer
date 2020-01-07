@@ -1,0 +1,257 @@
+# [RR Starter-kit 2020](https://rr-starter-kit.netlify.com/)
+
+A front-end starter-kit for quickly getting a new UI up and running using React and Redux Toolkit.
+
+This is an in-depth documentation of the technologies
+used in the starter-kit and the reasonings behind them.
+
+## Purpose
+
+A batteries included front-end starter-kit for 2020.
+This is my personal go-to set of tools for bootstrapping new projects. It quite a bit more than simply some pre-installed packages and a barebones example, as this covers everything from development experience and CI to Github project management and continuous deployment.
+
+## What's included
+
+The RR Starter-kit itself comes with a fully working example application. React and Redux Toolkit (with Typescript) is at the core of this starter kit. The starter-kit is bootstrapped using Create-React-App, and has not been ejected. As the project uses Typescript, ESLint and Prettier have been configured to handle linting and autofixing syntax problems. The project comes bundled with a simple Github workflow for Continuous Integration and default Github Issues and Pull Request templates.
+
+It is out-of-the-box compatible with deployments to static hosting providers such as Netlify and Zeit.
+
+## Project
+
+This section will go through the development experience related parts of the project, from folder structure to npm scripts, Typescript configurations to linting rules.
+
+### Folder structure
+
+Because the starter-kit is making use of a non-ejected Create-React-App (CRA) as it's foundation everything application related is located within the `src` folder.
+
+```
+rr-starter-kit/
+  README.md
+  node_modules/
+  .nvmrc
+  .prettierrc
+  package.json
+  postcss.config.js
+  tailwind.config.js
+  tsconfig.json
+  public/
+    _redirects
+    index.html
+    favicon.ico
+  src/
+    index.tsx
+    tailwind.css
+    api/
+    app/
+      App.tsx
+      rootReducer.ts
+      store.ts
+    components/
+    features/
+    pages/
+```
+
+- `root`: The application starts in `index.tsx` where we initialize the React application and provide it a store using Redux Toolkit:
+
+```
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
+);
+```
+
+- `app`: The core of the application is found in the `app` folder.
+  Here the `store`, `rootReducer` and `Router` are all configured.
+- `api`: This is where the logic to call external services goes.
+- `components`: reusable simple components like buttons, alerts etc.
+- `features`: more complex features that make us of Redux
+- `pages`: navigational pages, the root level component housing the part of the application that lives at that route
+
+### Typescript
+
+The project uses Typescript throughout. Some sensible defaults have been configured in `tsconfig.json`. Most notable addition is using absolute paths for all imports, with `src` as the `baseUrl`. This allows us to do imports throughout the project in the followin way: `import themeReducer from 'features/theme/themeSlice';`. This is more readable and clear than using relative paths.
+
+### ESLint
+
+Extended ESLint to work with Typescript.
+
+```
+"eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+```
+
+### Prettier
+
+Configured prettier to work correctly with ESLint, autoformatting according to the ESLint rules.
+
+## Stack
+
+### React
+
+There is not much special in the React setup other than the lack of `classes`.
+Everything is a component, making use of React `hooks` when needed:
+
+```tsx
+export const Header: React.FC = () => {
+  // Open mobile menu open
+  const [open, setOpen] = useState(false);
+  ...
+}
+```
+
+### Redux Toolkit
+
+Used in the demo example to manage the global state, consisting of the
+of the fetched remote data: `jokes` and the global dark mode.
+
+With Redux Toolkit the required boilerplate for Redux is kept at a minimum.
+The `createSlice` is a function that accepts an initial state, an object full of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
+
+```ts
+const jokesSlice = createSlice({
+  name: 'jokes',
+  initialState: jokesInitialState,
+  reducers: {
+    getJokesStart: startLoading,
+    getJokesSuccess(state, { payload }: PayloadAction<Jokes>) {
+      const { jokes } = payload;
+      state.jokes = jokes;
+      state.isLoading = false;
+      state.error = null;
+    },
+    getJokesFailure: loadingFailed,
+  },
+});
+```
+
+### Axios
+
+Axios is used in favor of `fetch` to interface with any external services.
+All outgoing request logic is located in the `api` folder.
+
+```ts
+export async function getRandomJokes(): Promise<Jokes> {
+  const url = `https://official-joke-api.appspot.com/jokes/ten`;
+
+  const jokesResponse = await axios.get<Joke[]>(url);
+  return { jokes: jokesResponse.data };
+}
+```
+
+The starter-kit is using `redux-thunk` to handle dispatching of async actions. Redux-thunk is the default middleware bundled with Redux Toolkit for handling async actions and side-effects.
+Here the `fetchJokes` function is using `async / await` to handle the fetching of remote data:
+
+```ts
+export const fetchJokes = (): AppThunk => async dispatch => {
+  try {
+    dispatch(getJokesStart());
+    const randomJokes = await getRandomJokes();
+    dispatch(getJokesSuccess(randomJokes));
+  } catch (err) {
+    dispatch(getJokesFailure(err.toString()));
+  }
+};
+```
+
+### Tailwind CSS
+
+Utility first CSS library that allows you to quickly create any kind of style and components you need without the need to actually write any additional CSS.
+Instead of defining a bunch of styles per component, Tailwind encourages you to build re-usable components that make use of the existing utility classes that exist in Tailwind already.
+
+Because the CRA app is not ejected, the CSS processing is done using PostCSS and not Webpack.
+There are three main files for any Tailwind project:
+
+- `tailwind.config.js` the main configuration file: here you can extend and modify the base config of Tailwin to suit your needs
+- `postcss.config.js` the "build" configuration, here you configure rules for the built production version of your css
+- `src/tailwind.css` the only CSS file you need to have in your project. This is where you add any actual CSS classes or modifications to existing Tailwind rules if needed.
+
+## Testing
+
+The starter-kit comes setup with Jest as the test-runner, makes use of Jests own assertion library and uses Enzyme on top of that for shallow render testing of React components.
+
+Shallow rendering allows us to render only the component we are testing without the need to render the entire application tree:
+
+```tsx
+it('renders welcome message', () => {
+  const wrapper = shallow(<Home />);
+  const welcome = <h1 className="text-center">RR Starter-kit 2020</h1>;
+  expect(wrapper).toContainReact(welcome);
+});
+```
+
+### Debugging
+
+Debugging in VSCode is super easy with a project bootstrapped using CRA.
+This project uses two disting launch configurations for VSCode debugging: one for actual application debugging using Chrome Debugger and the other for debugging tests using the built in debugger in VSCode.
+
+Here are the launch configurations:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Debug on Chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/src",
+      "sourceMapPathOverrides": {
+        "webpack:///src/*": "${webRoot}/*"
+      }
+    },
+    {
+      "name": "Debug Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
+      "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "env": { "CI": "true" },
+      "disableOptimisticBPs": true
+    }
+  ]
+}
+```
+
+## CI/CD
+
+The project comes with an automated CI (Continuous Integration) and CD (Continuous Deployment) pipeline built in.
+This means that whenever you create a Pull-Request on Github or commit something to `master`. The code is automatically tested and if deemed error-free deployed to production.
+
+### Github Actions
+
+The project is using a Github Workflow with some basic Github actions for automated testing.
+The code is checked out, packages are installed (and cached for faster run times) then the code is typechecked, linted and the test suite is run.
+
+If there are problems with the build Github highlights the failed build and notifies you.
+If the tests pass the succesful commit will be picked up by Netlify and autodeployed.
+
+### Auto Deployment
+
+Auto deployment to Netlify. This is mostly configured through the Netlify web console: you connect your repository to Netlify, configure a build command, an ouput folder and some deployment rules and after that it just works!
+
+## RR Starter-kit Example App
+
+### Async Data
+
+### Utility-first CSS
+
+### Dark mode
+
+### MDX
+
+### Icons / Images

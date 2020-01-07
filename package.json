@@ -1,0 +1,84 @@
+{
+  "name": "rr-starter-kit",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=12"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "1.1.0",
+    "@types/enzyme": "3.10.4",
+    "@types/enzyme-adapter-react-16": "1.0.5",
+    "@types/jest": "24.0.23",
+    "@types/node": "12.12.20",
+    "@types/react": "16.9.16",
+    "@types/react-dom": "16.9.4",
+    "@types/react-redux": "7.1.5",
+    "@types/react-router-dom": "5.1.3",
+    "@types/webpack-env": "1.14.1",
+    "axios": "0.19.0",
+    "dice-typescript": "1.6.1",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "jest-enzyme": "7.1.2",
+    "mdx.macro": "0.2.9",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "react-redux": "7.1.3",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "3.3.0",
+    "react-test-renderer": "16.12.0",
+    "source-map-explorer": "2.1.2",
+    "typescript": "3.7.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=node",
+    "eject": "react-scripts eject",
+    "typecheck": "tsc --noEmit --skipLibCheck",
+    "lint": "eslint --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
+    "lint:fix": "eslint --fix --ignore-path .gitignore . --ext ts --ext tsx --ext js --ext jsx",
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
+    "build:styles": "postcss src/tailwind.css -o src/styles.css",
+    "prebuild": "NODE_ENV=production npm run build:styles",
+    "prestart": "npm run build:styles"
+  },
+  "scriptsComments": {
+    "start": "Runs development build on a local server configured by server.js",
+    "build": "Builds the static production build",
+    "test": "Runs the tests in interactive mode, remove --env flag is `jsdom` is needed"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "react-app",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {
+      "prettier/prettier": "error"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "1.3.0",
+    "autoprefixer": "9.7.3",
+    "eslint-config-prettier": "6.7.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "postcss-cli": "6.1.3",
+    "prettier": "1.19.1",
+    "tailwindcss": "1.1.4",
+    "tailwindcss-dark-mode": "1.1.1"
+  }
+}
