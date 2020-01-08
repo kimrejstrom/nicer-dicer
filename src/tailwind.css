@@ -68,7 +68,7 @@ pre {
 }
 
 .text-shadow {
-  text-shadow: 0 0px 8px rgba(0, 0, 0, 0.4), 0 0px 14px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0px 8px rgba(0, 0, 0, 0.8), 0 0px 14px rgba(0, 0, 0, 0.8);
 }
 
 @tailwind components;

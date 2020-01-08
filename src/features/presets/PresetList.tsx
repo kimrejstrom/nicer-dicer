@@ -1,58 +1,35 @@
 import React from 'react';
-import battleAxe from 'features/presets/battle_axe.svg';
-import shield from 'features/presets/shield.svg';
-import sword from 'features/presets/sword.svg';
 import Carousel, { CarouselProps } from 'nuka-carousel';
 import { Preset } from 'features/presets/PresetFeature';
 
 export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   const renderedPresets = presets.map((preset, index) => {
-    let bgColor, icon;
-    switch (preset.rollType) {
-      case 'attack':
-        bgColor = 'bg-orange-500';
-        icon = sword;
-        break;
-      case 'damage':
-        bgColor = 'bg-teal-500';
-        icon = battleAxe;
-        break;
-      case 'save':
-        bgColor = 'bg-red-500';
-        icon = shield;
-        break;
-
-      default:
-        bgColor = 'bg-gray-700';
-        icon = sword;
-        break;
-    }
     return (
       <div
         key={index}
-        className={`${bgColor} m-1 relative overflow-hidden rounded-lg shadow-lg`}
+        className={`text-yellow-100 border border-yellow-900 bg-secondary-dark m-1 relative overflow-hidden rounded-lg shadow-lg`}
       >
         <svg
           className="absolute bottom-0 left-0 mb-2"
           viewBox="0 0 375 283"
           fill="none"
-          style={{ transform: 'scale(1.5)', opacity: 0.1 }}
+          style={{ transform: 'scale(1.1)', opacity: 0.05 }}
         >
           <rect
-            x="159.52"
+            x="160"
             y="175"
-            width="152"
-            height="152"
+            width="150"
+            height="150"
             rx="8"
-            transform="rotate(-45 159.52 175)"
+            transform="rotate(-45 160 175)"
             fill="white"
           />
           <rect
-            y="107.48"
-            width="152"
-            height="152"
+            y="110"
+            width="130"
+            height="130"
             rx="8"
-            transform="rotate(-45 0 107.48)"
+            transform="rotate(-45 0 110)"
             fill="white"
           />
         </svg>
@@ -65,18 +42,13 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
               opacity: 0.1,
             }}
           ></div>
-          <img
-            className="relative w-16 h-20 text-white fill-current opacity-25"
-            src={icon}
-            alt=""
-          />
-          <div className="block absolute">
+          <div className="block py-6">
             <span className="text-xl text-white font-bold text-shadow">
               {preset.formula}
             </span>
           </div>
         </div>
-        <div className="relative text-white px-2 pb-2 leading-none">
+        <div className="bg-secondary-dark relative text-white px-2 py-2 leading-none">
           <div className="flex justify-between items-center">
             <span className="opacity-75 capitalize text-xs">
               {preset.repeat ? 'Multiple' : 'Single'}
@@ -100,6 +72,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     wrapAround: true,
     slidesToShow: 2,
     cellAlign: 'center',
+    slideWidth: 0.8,
     transitionMode: 'scroll3d',
     withoutControls: true,
   };

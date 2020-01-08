@@ -10,6 +10,11 @@ module.exports = {
       'primary-dark': '#252020',
       'secondary-dark': '#393232',
     }),
+    borderColor: theme => ({
+      ...theme('colors'),
+      'primary-dark': '#252020',
+      'secondary-dark': '#393232',
+    }),
   },
   variants: {
     backgroundColor: ['dark', 'dark-hover', 'dark-group-hover'],

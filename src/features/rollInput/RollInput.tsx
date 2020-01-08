@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { Dice } from 'dice-typescript';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addRoll } from 'features/rollInput/rollInputSlice';
-import { RootState } from 'app/rootReducer';
+import { RollList } from 'features/rollList/RollList';
 
 export const RollInput = () => {
   const dispatch = useDispatch();
 
-  // Get rolls from Redux
-  const rollsState = useSelector((state: RootState) => state.rolls);
-
-  const [roll, setRoll] = useState('');
+  const [roll, setRoll] = useState('3d6');
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
@@ -34,10 +31,10 @@ export const RollInput = () => {
     <div className="m-auto py-4">
       <div className="flex flex-col items-center">
         <form className="text-center" onSubmit={handleSubmit}>
-          <label className="text-lg">
+          <label className="text-3xl">
             Roll your dice
             <input
-              className="text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2"
+              className="w-64 appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
               type="text"
               value={roll}
               onChange={e => setRoll(e.target.value)}
@@ -52,18 +49,7 @@ export const RollInput = () => {
           ) : (
             <>
               <RollResult result={result} />
-              <div>
-                <div>Previous Rolls:</div>
-                {rollsState.rolls ? (
-                  <ul>
-                    {rollsState.rolls.map(roll => (
-                      <li>{roll}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <span>Nothing here</span>
-                )}
-              </div>
+              <RollList />
             </>
           )}
         </div>
