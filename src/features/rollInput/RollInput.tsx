@@ -2,8 +2,16 @@ import React, { useState } from 'react';
 import { Dice } from 'dice-typescript';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRoll } from 'features/rollInput/rollInputSlice';
+import { RootState } from 'app/rootReducer';
 
 export const RollInput = () => {
+  const dispatch = useDispatch();
+
+  // Get rolls from Redux
+  const rollsState = useSelector((state: RootState) => state.rolls);
+
   const [roll, setRoll] = useState('');
   const [result, setResult] = useState();
   const [error, setError] = useState();
@@ -15,6 +23,7 @@ export const RollInput = () => {
       const rollResult = dice.roll(roll);
       setResult(rollResult);
       setError(undefined);
+      dispatch(addRoll(roll));
     } catch (error) {
       setError(error);
     }
@@ -41,7 +50,21 @@ export const RollInput = () => {
               <Alert title={'Something went wrong'} body={error.message} />
             </div>
           ) : (
-            <RollResult result={result} />
+            <>
+              <RollResult result={result} />
+              <div>
+                <div>Previous Rolls:</div>
+                {rollsState.rolls ? (
+                  <ul>
+                    {rollsState.rolls.map(roll => (
+                      <li>{roll}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <span>Nothing here</span>
+                )}
+              </div>
+            </>
           )}
         </div>
       </div>
