@@ -18,19 +18,22 @@ export const RollInput = () => {
 
   // Render
   return (
-    <div className="m-auto">
+    <div className="m-auto py-4">
       <div className="flex flex-col items-center">
-        <form onSubmit={handleSubmit}>
+        <form className="text-center" onSubmit={handleSubmit}>
           <label>
+            Roll your dice
             <input
-              className="flex bg-indigo-900 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+              className="flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded"
               type="text"
               value={roll}
               onChange={e => setRoll(e.target.value)}
             />
           </label>
         </form>
-        <div className="font-mono">{JSON.stringify(result)}</div>
+        <div className="font-mono w-full p-4 text-wrap">
+          {JSON.stringify(result)}
+        </div>
       </div>
     </div>
   );

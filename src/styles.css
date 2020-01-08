@@ -606,40 +606,40 @@ body {
 .heading {
   font-weight: 700;
   letter-spacing: -0.05em;
-  color: #3c366b;
+  color: #744210;
 }
 
 h1 {
   font-weight: 700;
   letter-spacing: -0.05em;
-  color: #3c366b;
+  color: #744210;
   font-size: 1.875rem;
 }
 
 h2 {
   font-weight: 700;
   letter-spacing: -0.05em;
-  color: #3c366b;
+  color: #744210;
   font-size: 1.5rem;
 }
 
 h3 {
   font-weight: 700;
   letter-spacing: -0.05em;
-  color: #3c366b;
+  color: #744210;
   font-size: 1.25rem;
 }
 
 .mode-dark h1,
 .mode-dark h2,
 .mode-dark h3 {
-  color: #c3dafe;
+  color: #fefcbf;
 }
 
 /* Code blocks */
 
 pre {
-  background-color: #1a202c;
+  background-color: #252020;
   padding: 1rem;
   border-radius: 0.25rem;
   margin-top: 1rem;
@@ -656,7 +656,7 @@ pre {
 
 .mdx pre code {
   font-size: 0.875rem;
-  background-color: #1a202c;
+  background-color: #252020;
   color: #9ae6b4;
 }
 
@@ -667,7 +667,7 @@ pre {
 
 .mode-dark .mdx pre code {
   font-size: 0.875rem;
-  background-color: #1a202c;
+  background-color: #252020;
   color: #9ae6b4;
 }
 
@@ -676,7 +676,7 @@ pre {
 .spinner {
   border-width: 4px;
   border-radius: 9999px;
-  border-color: #a3bffa;
+  border-color: #faf089;
   width: 4rem;
   height: 4rem;
   border-top-color: #667eea;
@@ -1153,6 +1153,14 @@ pre {
   background-color: #702459;
 }
 
+.bg-primary-dark {
+  background-color: #252020;
+}
+
+.bg-secondary-dark {
+  background-color: #393232;
+}
+
 .mode-dark .dark\:bg-transparent {
   background-color: transparent;
 }
@@ -1523,6 +1531,14 @@ pre {
 
 .mode-dark .dark\:bg-pink-900 {
   background-color: #702459;
+}
+
+.mode-dark .dark\:bg-primary-dark {
+  background-color: #252020;
+}
+
+.mode-dark .dark\:bg-secondary-dark {
+  background-color: #393232;
 }
 
 .mode-dark .dark-hover\:bg-transparent:hover {
@@ -1897,6 +1913,14 @@ pre {
   background-color: #702459;
 }
 
+.mode-dark .dark-hover\:bg-primary-dark:hover {
+  background-color: #252020;
+}
+
+.mode-dark .dark-hover\:bg-secondary-dark:hover {
+  background-color: #393232;
+}
+
 .mode-dark .group:hover .dark-group-hover\:bg-transparent {
   background-color: transparent;
 }
@@ -2267,6 +2291,14 @@ pre {
 
 .mode-dark .group:hover .dark-group-hover\:bg-pink-900 {
   background-color: #702459;
+}
+
+.mode-dark .group:hover .dark-group-hover\:bg-primary-dark {
+  background-color: #252020;
+}
+
+.mode-dark .group:hover .dark-group-hover\:bg-secondary-dark {
+  background-color: #393232;
 }
 
 .bg-bottom {

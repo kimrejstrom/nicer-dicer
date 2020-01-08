@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Footer: React.FC = () => (
-  <footer className="flex justify-center bg-gray-900 dark:bg-black p-4">
+  <footer className="flex justify-center bg-primary-dark dark:bg-black p-4">
     <div className="text-gray-700 text-center px-4 py-2 m-2">
       <a
         className="w-1/4 text-white"
@@ -21,19 +21,19 @@ export const Footer: React.FC = () => (
       <div className="text-sm font-light">
         <a
           href="#TODO"
-          className="m-2 opacity-75 text-indigo-300 hover:text-indigo-500"
+          className="m-2 opacity-75 text-yellow-300 hover:text-yellow-500"
         >
           Help
         </a>
         <a
           href="#TODO"
-          className="m-2 opacity-75 text-indigo-300 hover:text-indigo-500"
+          className="m-2 opacity-75 text-yellow-300 hover:text-yellow-500"
         >
           Send feedback
         </a>
         <a
           href="#TODO"
-          className="m-2 opacity-75 text-indigo-300 hover:text-indigo-500"
+          className="m-2 opacity-75 text-yellow-300 hover:text-yellow-500"
         >
           Privacy
         </a>

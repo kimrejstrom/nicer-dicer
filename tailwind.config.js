@@ -5,6 +5,11 @@ module.exports = {
         dark: { raw: '(prefers-color-scheme: dark)' },
       },
     },
+    backgroundColor: theme => ({
+      ...theme('colors'),
+      'primary-dark': '#252020',
+      'secondary-dark': '#393232',
+    }),
   },
   variants: {
     backgroundColor: ['dark', 'dark-hover', 'dark-group-hover'],

@@ -21,7 +21,7 @@ const App: React.FC = () => {
         <Header />
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <main className="bg-gray-100 dark:text-indigo-100 dark:bg-gray-900 flex-grow">
+        <main className="bg-gray-100 dark:text-yellow-100 dark:bg-primary-dark flex-grow">
           <Switch>
             <Route path="/about">
               <About />

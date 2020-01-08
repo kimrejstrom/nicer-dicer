@@ -105,7 +105,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-center p-4 max-w-md m-auto">
+    <div className="flex flex-wrap items-center justify-center px-4 pt-4 max-w-md m-auto">
       <Carousel {...carouselSettings}>{renderedPresets}</Carousel>
     </div>
   );

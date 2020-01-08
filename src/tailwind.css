@@ -17,7 +17,7 @@ body {
 
 /* Headings */
 .heading {
-  @apply font-bold tracking-tighter text-indigo-900;
+  @apply font-bold tracking-tighter text-yellow-900;
 }
 
 h1 {
@@ -35,12 +35,12 @@ h3 {
 .mode-dark h1,
 .mode-dark h2,
 .mode-dark h3 {
-  @apply text-indigo-200;
+  @apply text-yellow-200;
 }
 
 /* Code blocks */
 pre {
-  @apply bg-gray-900 p-4 rounded mt-4 mb-4;
+  @apply bg-primary-dark p-4 rounded mt-4 mb-4;
 }
 
 .mdx code {
@@ -48,7 +48,7 @@ pre {
 }
 
 .mdx pre code {
-  @apply text-sm bg-gray-900 text-green-300;
+  @apply text-sm bg-primary-dark text-green-300;
 }
 
 .mode-dark .mdx code {
@@ -56,13 +56,13 @@ pre {
 }
 
 .mode-dark .mdx pre code {
-  @apply text-sm bg-gray-900 text-green-300;
+  @apply text-sm bg-primary-dark text-green-300;
 }
 
 /* Spinners */
 
 .spinner {
-  @apply border-4 rounded-full border-indigo-300 w-16 h-16;
+  @apply border-4 rounded-full border-yellow-300 w-16 h-16;
   border-top-color: theme('colors.indigo.500');
   animation: spin 1s linear infinite;
 }
