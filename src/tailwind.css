@@ -67,6 +67,10 @@ pre {
   animation: spin 1s linear infinite;
 }
 
+.text-shadow {
+  text-shadow: 0 0px 8px rgba(0, 0, 0, 0.4), 0 0px 14px rgba(0, 0, 0, 0.4);
+}
+
 @tailwind components;
 /* purgecss end ignore */
 

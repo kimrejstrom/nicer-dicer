@@ -22,6 +22,7 @@
     "enzyme-adapter-react-16": "1.15.1",
     "jest-enzyme": "7.1.2",
     "mdx.macro": "0.2.9",
+    "nuka-carousel": "4.6.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-redux": "7.1.3",
