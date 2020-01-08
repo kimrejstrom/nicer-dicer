@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 import { Dice } from 'dice-typescript';
+import { Alert } from 'components/Alert/Alert';
+import { RollResult } from 'features/rollResult/RollResult';
 
 export const RollInput = () => {
   const [roll, setRoll] = useState('');
   const [result, setResult] = useState();
+  const [error, setError] = useState();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const dice = new Dice();
-    const rollResult = dice.roll(roll);
-    // {5+1d20 ... 10}>=17 Normal
-    // {2+2d20kl...10}>=14 Disadvantage
-    // {2+2d20kh ... 10}>=14 Advantage
-    console.log(result);
-    setResult(rollResult);
+    try {
+      const rollResult = dice.roll(roll);
+      setResult(rollResult);
+      setError(undefined);
+    } catch (error) {
+      setError(error);
+    }
   };
 
   // Render
@@ -21,18 +25,24 @@ export const RollInput = () => {
     <div className="m-auto py-4">
       <div className="flex flex-col items-center">
         <form className="text-center" onSubmit={handleSubmit}>
-          <label>
+          <label className="text-lg">
             Roll your dice
             <input
-              className="flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded"
+              className="text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2"
               type="text"
               value={roll}
               onChange={e => setRoll(e.target.value)}
             />
           </label>
         </form>
-        <div className="font-mono w-full p-4 text-wrap">
-          {JSON.stringify(result)}
+        <div className="w-full p-4 text-wrap">
+          {error ? (
+            <div className="font-mono mb-6 m-auto w-11/12 md:w-2/3 lg:w-1/3">
+              <Alert title={'Something went wrong'} body={error.message} />
+            </div>
+          ) : (
+            <RollResult result={result} />
+          )}
         </div>
       </div>
     </div>
