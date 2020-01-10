@@ -41,14 +41,14 @@ export const PresetFeature = () => {
     {
       rollType: 'save',
       defaultDie: 'd20',
-      formula: `1d20kl+5`,
+      formula: `2d20kl+5`,
       repeat: false,
       modifier: 'disadvantage',
     },
     {
       rollType: 'save',
       defaultDie: 'd20',
-      formula: `{5+1d20kl...10}>=15`,
+      formula: `{5+2d20kl...10}>=15`,
       repeat: true,
       modifier: 'disadvantage',
     },

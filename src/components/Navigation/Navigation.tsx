@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import d20 from 'images/d20.svg';
+import d20 from 'images/logo.svg';
 
 export const Navigation: React.FC = () => {
   return (

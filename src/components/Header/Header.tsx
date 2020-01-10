@@ -1,5 +1,5 @@
 import React from 'react';
-import d20 from 'images/d20.svg';
+import d20 from 'images/logo.svg';
 
 export const Header: React.FC = () => {
   return (

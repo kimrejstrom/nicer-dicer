@@ -22,7 +22,6 @@ export const RollInput = () => {
     const dice = new Dice();
     try {
       const rollResult = dice.roll(currentRoll);
-      console.log(rollResult);
       setResult(rollResult);
       setError(undefined);
       dispatch(addRoll(currentRoll));
