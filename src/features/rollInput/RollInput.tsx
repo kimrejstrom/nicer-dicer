@@ -2,25 +2,30 @@ import React, { useState } from 'react';
 import { Dice } from 'dice-typescript';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
-import { useDispatch } from 'react-redux';
-import { addRoll } from 'features/rollInput/rollInputSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { addRoll, setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import { RollList } from 'features/rollList/RollList';
+import { RootState } from 'app/rootReducer';
 
 export const RollInput = () => {
   const dispatch = useDispatch();
 
-  const [roll, setRoll] = useState('3d6');
+  // const [roll, setRoll] = useState('3d6');
   const [result, setResult] = useState();
   const [error, setError] = useState();
+
+  // Get currentRoll from Redux
+  const { currentRoll } = useSelector((state: RootState) => state.rolls);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const dice = new Dice();
     try {
-      const rollResult = dice.roll(roll);
+      const rollResult = dice.roll(currentRoll);
+      console.log(rollResult);
       setResult(rollResult);
       setError(undefined);
-      dispatch(addRoll(roll));
+      dispatch(addRoll(currentRoll));
     } catch (error) {
       setError(error);
     }
@@ -36,8 +41,8 @@ export const RollInput = () => {
             <input
               className="w-64 appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
               type="text"
-              value={roll}
-              onChange={e => setRoll(e.target.value)}
+              value={currentRoll}
+              onChange={e => dispatch(setCurrentRoll(e.target.value))}
             />
           </label>
         </form>

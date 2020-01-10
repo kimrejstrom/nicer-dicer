@@ -1,8 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'app/rootReducer';
+import { setCurrentRoll } from 'features/rollInput/rollInputSlice';
 
 export const RollList: React.FC = () => {
+  const dispatch = useDispatch();
   // Get rolls from Redux
   const rollsState = useSelector((state: RootState) => state.rolls);
   // Render
@@ -12,7 +14,12 @@ export const RollList: React.FC = () => {
       {rollsState.rolls.length ? (
         <div className="flex flex-wrap items-center justify-around w-56 m-auto">
           {rollsState.rolls.map(roll => (
-            <div className="m-1 p-2 rounded-full bg-primary-dark">{roll}</div>
+            <button
+              onClick={() => dispatch(setCurrentRoll(roll))}
+              className="m-1 p-2 rounded-full bg-primary-dark"
+            >
+              {roll}
+            </button>
           ))}
         </div>
       ) : (

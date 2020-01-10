@@ -646,15 +646,25 @@ pre {
   margin-bottom: 1rem;
 }
 
+.mdx {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.mdx h1,
+.mdx h2,
+.mdx h3 {
+  margin-top: 0.5rem
+}
+
 .mdx code {
-  background-color: #4a5568;
-  color: #edf2f7;
+  background-color: #252020;
+  color: #faf089;
 }
 
 .mdx pre code {
   font-size: 0.875rem;
   background-color: #252020;
-  color: #9ae6b4;
+  color: #faf089;
 }
 
 /* Spinners */

@@ -1,257 +1,172 @@
-# [RR Starter-kit 2020](https://rr-starter-kit.netlify.com/)
+import { Link } from 'react-router-dom';
 
-A front-end starter-kit for quickly getting a new UI up and running using React and Redux Toolkit.
+# Nicer Dicer Info
 
-This is an in-depth documentation of the technologies
-used in the starter-kit and the reasonings behind them.
+Nicer Dicer uses the [`dice-typescript`](https://github.com/trwolfe13/dice-typescript) package as it's dice engine. Dice-Typescript is based on the Roll20 dice specification that can be found on the [Roll20 Wiki](https://wiki.roll20.net/Dice_Reference).
 
-## Purpose
+There are a number of presets available on the dice roller <Link className="text-yellow-400" to="/roller">page</Link> that you can easily copy and modify to get started.
 
-A batteries included front-end starter-kit for 2020.
-This is my personal go-to set of tools for bootstrapping new projects. It quite a bit more than simply some pre-installed packages and a barebones example, as this covers everything from development experience and CI to Github project management and continuous deployment.
+## Dice Specification
 
-## What's included
+Nicer Dicer supports more than just your standard polyhedrons when rolling dice, below are the available die types you can use in your games.
 
-The RR Starter-kit itself comes with a fully working example application. React and Redux Toolkit (with Typescript) is at the core of this starter kit. The starter-kit is bootstrapped using Create-React-App, and has not been ejected. As the project uses Typescript, ESLint and Prettier have been configured to handle linting and autofixing syntax problems. The project comes bundled with a simple Github workflow for Continuous Integration and default Github Issues and Pull Request templates.
+### Basic Roll `NdX`
 
-It is out-of-the-box compatible with deployments to static hosting providers such as Netlify and Zeit.
+Rolls **N** traditional (almost, you can have any number of sides that you want) dice with **X** sides per die. **N** must be greater than or equal to 0 and **X** must be greater than or equal to 1.
 
-## Project
+### Fate/Fudge Roll `NdF`
 
-This section will go through the development experience related parts of the project, from folder structure to npm scripts, Typescript configurations to linting rules.
+Rolls **N** Fate/Fudge dice. These dice have three sides with values of -1, 0, and 1.
 
-### Folder structure
+### Computed Dice Roll `(N+Y)dX`/`Nd(X+Y)`
 
-Because the starter-kit is making use of a non-ejected Create-React-App (CRA) as it's foundation everything application related is located within the `src` folder.
+Computes the number of dice to roll or the number of sides on the dice based on the mathematical expression in the parentheses. Dice coputation can be used with both Basic and Fate dice.
 
-```
-rr-starter-kit/
-  README.md
-  node_modules/
-  .nvmrc
-  .prettierrc
-  package.json
-  postcss.config.js
-  tailwind.config.js
-  tsconfig.json
-  public/
-    _redirects
-    index.html
-    favicon.ico
-  src/
-    index.tsx
-    tailwind.css
-    api/
-    app/
-      App.tsx
-      rootReducer.ts
-      store.ts
-    components/
-    features/
-    pages/
-```
+## Roll Modifiers
 
-- `root`: The application starts in `index.tsx` where we initialize the React application and provide it a store using Redux Toolkit:
+Modfiers that can change the behavior or outcome of dice rolls. Each modifier states which **Types Of Dice** it can be applied to in parentheses after the modifier name. Rolls can have multiple modifiers applied to a single roll to allow for complex dice expressions.
 
-```
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root'),
-);
-```
+- **B** - Basic Roll
+- **F** - Fate/Fudge Roll
 
-- `app`: The core of the application is found in the `app` folder.
-  Here the `store`, `rootReducer` and `Router` are all configured.
-- `api`: This is where the logic to call external services goes.
-- `components`: reusable simple components like buttons, alerts etc.
-- `features`: more complex features that make us of Redux
-- `pages`: navigational pages, the root level component housing the part of the application that lives at that route
+### Target Number / Successes (B,F) - `CP`
 
-### Typescript
+Normally when you perform a roll, Roll20 reports back the total value of all the dice rolled, plus any modifiers. Some game systems, though, work by rolling a set of dice versus a target number, and then adding up the total number of successes instead.
 
-The project uses Typescript throughout. Some sensible defaults have been configured in `tsconfig.json`. Most notable addition is using absolute paths for all imports, with `src` as the `baseUrl`. This allows us to do imports throughout the project in the followin way: `import themeReducer from 'features/theme/themeSlice';`. This is more readable and clear than using relative paths.
+- Example Success Checks
+- `3d6>=3` - Roll 3 d6's and count one success for each roll of 3 or higher
+- `10d6<=4` - Roll 10 d6's and count one success for each roll of 4 or less
 
-### ESLint
+### Failures (B,F) - `fCP`
 
-Extended ESLint to work with Typescript.
+Some systems build on success checks by also including failures. Failure checks only work when a success check is already being done and each failure subtracts one from the total number of successes.
 
-```
-"eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "react-app",
-      "plugin:prettier/recommended"
-    ],
-    "rules": {
-      "prettier/prettier": "error"
-    }
-  },
-```
+- Example Failure Checks
+- `3d6>=3f1` - Roll 3 d6's and count one success for each roll of 3 or higher and one failure for each 1
+- `10d6<=4f>=5` - Roll 10 d6's and count one success for each roll of 4 or less and one failure for each roll of 5 or more
 
-### Prettier
+### Exploding Dice (B,F) `!CP`
 
-Configured prettier to work correctly with ESLint, autoformatting according to the ESLint rules.
+Exploding dice, also known as "rule of 6" or "rule of 10s" depending on your gaming system, rolls an additional die if the maximum is rolled. If the additional roll is also the maximum number the additional rolls keep on going! The Compare Point can be specified to change the exploding trigger.
 
-## Stack
+- Example Exploding Dice
+- `3d6!` - Rolls 3d6 and explodes every time a 6 is rolled
+- `3d6!>=5` - Rolls 3d6 and explodes every time a 5 or 6 is rolled
 
-### React
+### Compounding Dice (B,F) `!!CP`
 
-There is not much special in the React setup other than the lack of `classes`.
-Everything is a component, making use of React `hooks` when needed:
+Shadowrun (and some other systems) use a special style of exploding dice where the the additional rolls for each dice are added together as a single "roll". To do this, just use two exclamation marks instead of one. With the compounding exploding rolls a single roll can be infinitely high! The Compare Point can be specified to change the exploding trigger.
 
-```tsx
-export const Header: React.FC = () => {
-  // Open mobile menu open
-  const [open, setOpen] = useState(false);
-  ...
-}
-```
+- Example Compounding Dice
+- `5d6!!` - Rolls 5d6 and compound every time a 6 is rolled
+- `5d6!!5` - Rolls 5d6 and compound every time a 5 is rolled, 6's will be treated as a normal roll
 
-### Redux Toolkit
+### Penetrating Dice (B,F) `!pCP`
 
-Used in the demo example to manage the global state, consisting of the
-of the fetched remote data: `jokes` and the global dark mode.
+HackMaster (and some other systems) use a special style of exploding dice where the the additional rolls for each dice have 1 subtracted from the roll. To do this, add a p after the exclamation mark. A die can penetrate multiple times but the modifier is only ever -1 to each additional die.
 
-With Redux Toolkit the required boilerplate for Redux is kept at a minimum.
-The `createSlice` is a function that accepts an initial state, an object full of reducer functions, and a "slice name", and automatically generates action creators and action types that correspond to the reducers and state.
+- Example Compounding Dice
+- `5d6!p` - Rolls 5d6 and explode with a -1 modifier every time a 6 is rolled
+- `5d6!p>=5` - Rolls 5d6 and explode with a -1 modifier every time a 5 or higher is rolled.
 
-```ts
-const jokesSlice = createSlice({
-  name: 'jokes',
-  initialState: jokesInitialState,
-  reducers: {
-    getJokesStart: startLoading,
-    getJokesSuccess(state, { payload }: PayloadAction<Jokes>) {
-      const { jokes } = payload;
-      state.jokes = jokes;
-      state.isLoading = false;
-      state.error = null;
-    },
-    getJokesFailure: loadingFailed,
-  },
-});
-```
+### Keep / Drop Dice (B,F) `khN`/`klN`/`dhN`/`dlN`
 
-### Axios
+Some game systems ask you to roll a large number of dice, and then either drop a certain number (**N**) of the lowest rolls, or keep only a certain number (**N**) of the highest rolls. Roll20 supports this type of roll through the `d` and `k` commands, respectively. The optional `h`/`l` parameter can either be `h` to keep or drop the highest **N** dice or `l` to keep or drop the lowest **N** dice. If not specified when keeping rolls the high rolls will be kept and when dropping rolls the low rolls will be dropped.
 
-Axios is used in favor of `fetch` to interface with any external services.
-All outgoing request logic is located in the `api` folder.
+- Example Keep Rolls
+- `8d100k4` - Roll 8 d100's and keep the four largest rolls.
+- `8d100kl4` - Roll 8 d100's and keep the four smallest rolls.
+- Example Drop Rolls
+- `8d100d4` - Roll 8 d100's and drop the four smallest rolls.
+- `8d100dh4` - Roll 8 d100's and drop the four largest rolls.
 
-```ts
-export async function getRandomJokes(): Promise<Jokes> {
-  const url = `https://official-joke-api.appspot.com/jokes/ten`;
+### Rerolling Dice (B,F) `rCP`
 
-  const jokesResponse = await axios.get<Joke[]>(url);
-  return { jokes: jokesResponse.data };
-}
-```
+Several systems require that certain dice be reroll, for example brutal weapons in D&D 4e require any 1s or 2s to be re-rolled and the orignal die value ignored. The reroll modifier can be specified multiple times to allow rerolling at multiple Compare Points
 
-The starter-kit is using `redux-thunk` to handle dispatching of async actions. Redux-thunk is the default middleware bundled with Redux Toolkit for handling async actions and side-effects.
-Here the `fetchJokes` function is using `async / await` to handle the fetching of remote data:
+- Example Rerolls
+- `2d10r<=2` - Roll 2 d10's and reroll any time a 2 or lower is rolled
+- `8d6r` - Roll 8 d6's and reroll any time a 1 is rolled
+- `8d6r2r4r6` - Roll 8 d6's and reroll any time a 2, 4, or 6 is rolled
 
-```ts
-export const fetchJokes = (): AppThunk => async dispatch => {
-  try {
-    dispatch(getJokesStart());
-    const randomJokes = await getRandomJokes();
-    dispatch(getJokesSuccess(randomJokes));
-  } catch (err) {
-    dispatch(getJokesFailure(err.toString()));
-  }
-};
-```
+### Sorting Dice (B,F) `sa`/`sd`
 
-### Tailwind CSS
+You may want to see your results in either ascending or descending order. The sorting modifier does just this. The order parameter is optional and specifies the order to sort with `a` for ascending and `d` for descending. Sorting defaults to ascending if order is not specified.
 
-Utility first CSS library that allows you to quickly create any kind of style and components you need without the need to actually write any additional CSS.
-Instead of defining a bunch of styles per component, Tailwind encourages you to build re-usable components that make use of the existing utility classes that exist in Tailwind already.
+- Example Rerolls
+- `8d6s` - Roll 8 d6's and sort the results in ascending order
+- `8d6sd` - Roll 8 d6's and sort the results in descending order
 
-Because the CRA app is not ejected, the CSS processing is done using PostCSS and not Webpack.
-There are three main files for any Tailwind project:
+### Order of Operations for Modifiers
 
-- `tailwind.config.js` the main configuration file: here you can extend and modify the base config of Tailwin to suit your needs
-- `postcss.config.js` the "build" configuration, here you configure rules for the built production version of your css
-- `src/tailwind.css` the only CSS file you need to have in your project. This is where you add any actual CSS classes or modifications to existing Tailwind rules if needed.
+Modifiers are applied in the following order:
 
-## Testing
+- Exploding, Compounding, Penetrating, Rerolls
+- These are applied while the dice are still rolling. imagine that you roll some exploding 6d6 on your table and the instant one of them settles as a 6 another die is rolled
+- Keep, Drop, Success, Failure, Sorting
+- These are applied after all of the dice have "settled" and all of the result values are known.
 
-The starter-kit comes setup with Jest as the test-runner, makes use of Jests own assertion library and uses Enzyme on top of that for shallow render testing of React components.
+### Grouped Rolls
 
-Shallow rendering allows us to render only the component we are testing without the need to render the entire application tree:
+Mutliple rolls can be perfomed within a group via curly braces using a comma to seperate the sub-roll expressions `{3d6+3d4+5, 2d8+4}`. Grouped Rolls have their own set of Group Modifiers which perform actions across the whole group.
 
-```tsx
-it('renders welcome message', () => {
-  const wrapper = shallow(<Home />);
-  const welcome = <h1 className="text-center">RR Starter-kit 2020</h1>;
-  expect(wrapper).toContainReact(welcome);
-});
-```
+### Grouped Roll Modifiers
 
-### Debugging
+Modfiers that can change the behavior or outcome of grouped rolls. Grouped Rolls can have multiple modifiers applied to a group roll to allow for complex dice expressions.
 
-Debugging in VSCode is super easy with a project bootstrapped using CRA.
-This project uses two disting launch configurations for VSCode debugging: one for actual application debugging using Chrome Debugger and the other for debugging tests using the built in debugger in VSCode.
+### Keep / Drop `khN`/`klN`/`dhN`/`dlN`
 
-Here are the launch configurations:
+To apply a keep or drop modifier across multiple types of dice wrap the roll in a group. With a single Sub-Roll in the group the keep/drop operation is applied across all rolls. To choose the best or worse roll expression multiple sub-groups can be used. In this case the keep/drop operation is applied to the final result of each subgroup.
 
-```json
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "chrome",
-      "request": "launch",
-      "name": "Debug on Chrome",
-      "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/src",
-      "sourceMapPathOverrides": {
-        "webpack:///src/*": "${webRoot}/*"
-      }
-    },
-    {
-      "name": "Debug Tests",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/react-scripts",
-      "args": ["test", "--runInBand", "--no-cache", "--watchAll=false"],
-      "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
-      "console": "integratedTerminal",
-      "internalConsoleOptions": "neverOpen",
-      "env": { "CI": "true" },
-      "disableOptimisticBPs": true
-    }
-  ]
-}
-```
+- Single Sub-Roll Keep Example
+- `{4d6+3d8}k4` - Roll 4 d6's and 3 d8's, out of those 7 dice the highest 4 are kept and summed up.
+- Multiple Sub-Roll Drop Example
+- `{4d6+2d8, 3d20+3, 5d10+1}d1` - Roll each of the three sub-roll expressions and total them up. Drop the sub-roll expression with the lowest total and sum the other two totals as the result.
 
-## CI/CD
+### Target Number / Successes (B,F) - `CP`
 
-The project comes with an automated CI (Continuous Integration) and CD (Continuous Deployment) pipeline built in.
-This means that whenever you create a Pull-Request on Github or commit something to `master`. The code is automatically tested and if deemed error-free deployed to production.
+The same concept as when using on Dice Rolls but with different behavor for a group. For a Grouped Roll with a single sub-roll expression the success check is done after the remaining math expressions have been totaled into each roll. Single sub-roll groups are also useful when doing a success check on a roll that has another Compare Point enabled modifer. For a Grouped Roll with a multiple sub-roll expression the success check is applied to the esult of each sub-roll expression.
 
-### Github Actions
+- Single Sub-Roll Success Example
+- `{3d20+5}>=21` - Roll 3 d20's, for each roll add 5 and then count a success for each result of 21 or more.
+- `{2d6!}>=4` - Roll 2d6 exploding and count a success for each roll of 4 or greater.
+- Multiple Sub-Roll Success Example
+- `{4d6+2d8, 3d20+3, 5d10+1}>=40` - Roll each of the three sub-roll expression and total them up. Count one success for each sub-roll total of 40 or more.
 
-The project is using a Github Workflow with some basic Github actions for automated testing.
-The code is checked out, packages are installed (and cached for faster run times) then the code is typechecked, linted and the test suite is run.
+### Failures (B,F) - `fCP`
 
-If there are problems with the build Github highlights the failed build and notifies you.
-If the tests pass the succesful commit will be picked up by Netlify and autodeployed.
+Failure checks on groups work just like success checks.
 
-### Auto Deployment
+- Single Sub-Roll Failure Example
+- `{3d20+5}>=21f<=10` - Roll 3 d20's, for each roll add 5 and then count a success for each result of 21 or more and count a failure for each result of 10 or less.
+- `{2d6!}>=4f1` - Roll 2d6 exploding and count a success for each roll of 4 or greater and a failure for each roll of 1.
+- Multiple Sub-Roll Failure Example
+- `{4d6+2d8, 3d20+3, 5d10+1}>=40f<=10` - Roll each of the three sub-roll expression and total them up. Count one success for each sub-roll total of 40 or more and one failure for each sub-roll total of 10 or less.
 
-Auto deployment to Netlify. This is mostly configured through the Netlify web console: you connect your repository to Netlify, configure a build command, an ouput folder and some deployment rules and after that it just works!
+### Dice Expression Syntax
 
-## RR Starter-kit Example App
+In addition to the above syntax rules, some slightly more complicated variations are also available. For example, you can roll a variable number of dice using an expression similar to the following:
 
-### Async Data
+`4d4)d20`
 
-### Utility-first CSS
+### Conditional Operators
 
-### Dark mode
+As per the Roll20 syntax, you can use conditional operators, such as in `4d20>10`, but in this library, the semantics of those operators is slightly different. In the Roll20 engine, `>10` actually means `>=10`, but in this library, you would need to actually use the `>=` operator. I feel needing to use the correct mathematical operators makes for a more intuitive library.
 
-### MDX
+### Group Repeaters
 
-### Icons / Images
+Sometimes it is necessary to roll complex groups of dice that aren't supported by the basic syntax. For example, rolling a saving throw at disadvantage for 10 creatures. For this, you can use the group repeater modifier, which works like this:
+
+`{2d20k...10}>=14`
+
+The above will roll 10 disadvantaged saving throws, reporting successes for those that break DC14.
+
+### Fractional Dice Rolls
+
+Using the allowed syntax, it is possible to request a fractional number of dice to be rolled. Take the following example:
+
+`2 / 5)d6`
+
+In this instance, the number of dice to be rolled will be rounded to the nearest integer (2.5 gets rounded up to 3).
+
+This will first roll `4d4` dice, and use the outcome of that to determine how many `d20` dice will be rolled.

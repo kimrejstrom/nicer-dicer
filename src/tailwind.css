@@ -43,12 +43,22 @@ pre {
   @apply bg-primary-dark p-4 rounded mt-4 mb-4;
 }
 
+.mdx {
+  @apply font-sans;
+}
+
+.mdx h1,
+.mdx h2,
+.mdx h3 {
+  @apply mt-2
+}
+
 .mdx code {
-  @apply bg-gray-700 text-gray-200;
+  @apply bg-primary-dark text-yellow-300;
 }
 
 .mdx pre code {
-  @apply text-sm bg-primary-dark text-green-300;
+  @apply text-sm bg-primary-dark text-yellow-300;
 }
 
 /* Spinners */

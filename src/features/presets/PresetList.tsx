@@ -1,13 +1,18 @@
 import React from 'react';
 import Carousel, { CarouselProps } from 'nuka-carousel';
 import { Preset } from 'features/presets/PresetFeature';
+import { useDispatch } from 'react-redux';
+import { setCurrentRoll } from 'features/rollInput/rollInputSlice';
 
 export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
+  const dispatch = useDispatch();
+
   const renderedPresets = presets.map((preset, index) => {
     return (
       <div
+        onClick={() => dispatch(setCurrentRoll(preset.formula))}
         key={index}
-        className={`text-yellow-100 border border-yellow-900 bg-secondary-dark m-1 relative overflow-hidden rounded-lg shadow-lg`}
+        className="block text-yellow-100 border border-yellow-900 bg-secondary-dark m-1 relative overflow-hidden rounded-lg shadow-lg"
       >
         <svg
           className="absolute bottom-0 left-0 mb-2"

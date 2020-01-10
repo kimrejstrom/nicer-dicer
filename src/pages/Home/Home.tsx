@@ -1,37 +1,29 @@
-import React, { useState } from 'react';
-import d20 from 'pages/Home/d20.svg';
-import { PresetFeature } from 'features/presets/PresetFeature';
-import { RollInput } from 'features/rollInput/RollInput';
-import Button from 'components/Button/Button';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const Home: React.FC = () => {
-  // Open mobile menu open
-  const [presetsOpen, setPresetsOpen] = useState(false);
   return (
-    <div className="container mx-auto">
-      <div className="flex justify-center items-center">
-        <div className="w-full absolute top-0 h-1 bg-yellow-700"></div>
-        <h1 className="text-center mt-4 mr-12">Nicer</h1>
-        <div className="absolute arrow-down shape-shadow"></div>
-        <img
-          src={d20}
-          className="absolute top-0 w-12 px-2 py-2 shape-shadow"
-          alt="logo"
-        />
-        <h1 className="text-center mt-4 ml-12">Dicer</h1>
+    <div className="container mx-auto mt-8">
+      <div className="text-center">
+        <div className="text-white text-xl pb-4">
+          The Ultimate RPG Dice Roller
+        </div>
+        <p className="mx-auto w-64 mb-6">
+          The dice roller is very easy to use, simply type in the formula in the
+          box and press enter. Nicer Dicer features support for a wide array of
+          dice mechanics. For the complete list of available commands, visit the{' '}
+          <Link className="text-yellow-500" to="/about">
+            Help
+          </Link>{' '}
+          page.
+        </p>
+        <Link
+          to="roller"
+          className="bg-transparent text-lg text-yellow-500 py-2 px-4 border border-yellow-700 rounded"
+        >
+          Get Started
+        </Link>
       </div>
-      <div className="text-center mt-6 mb-6">
-        <div className="text-white text-xl">The Ultimate RPG Dice Roller</div>
-      </div>
-      <div className="flex justify-center items-center">
-        <Button
-          title={presetsOpen ? 'Hide Presets' : 'Show Presets'}
-          onClick={() => setPresetsOpen(!presetsOpen)}
-          className="bg-transparent text-yellow-700 py-2 px-4 border border-yellow-900 rounded"
-        />
-      </div>
-      {presetsOpen ? <PresetFeature /> : undefined}
-      <RollInput />
     </div>
   );
 };
