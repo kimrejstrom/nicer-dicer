@@ -1,3 +1,3 @@
-# DnD Dice Roller
+# Nicer Dicer
 
-TODO
+PWA / Web RPG Dice Roller
