@@ -4,6 +4,8 @@ import { Home } from 'pages/Home/Home';
 
 it('renders welcome message', () => {
   const wrapper = shallow(<Home />);
-  const welcome = <h1 className="text-center">RR Starter-kit 2020</h1>;
+  const welcome = (
+    <div className="text-white text-xl pb-4">The Ultimate RPG Dice Roller</div>
+  );
   expect(wrapper).toContainReact(welcome);
 });
