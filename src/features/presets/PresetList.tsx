@@ -73,7 +73,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     slidesToShow: 2,
     cellAlign: 'center',
     slideWidth: 0.8,
-    transitionMode: 'scroll3d',
+    transitionMode: 'scroll',
     withoutControls: true,
   };
 

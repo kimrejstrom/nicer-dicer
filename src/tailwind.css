@@ -17,7 +17,7 @@ body {
 
 /* Headings */
 .heading {
-  @apply font-bold tracking-tighter text-yellow-900;
+  @apply font-bold tracking-tighter text-yellow-200;
 }
 
 h1 {
@@ -32,9 +32,9 @@ h3 {
   @apply heading text-xl;
 }
 
-.mode-dark h1,
-.mode-dark h2,
-.mode-dark h3 {
+h1,
+h2,
+h3 {
   @apply text-yellow-200;
 }
 
@@ -44,18 +44,10 @@ pre {
 }
 
 .mdx code {
-  @apply text-sm bg-gray-200 text-gray-900 p-px rounded;
-}
-
-.mdx pre code {
-  @apply text-sm bg-primary-dark text-green-300;
-}
-
-.mode-dark .mdx code {
   @apply bg-gray-700 text-gray-200;
 }
 
-.mode-dark .mdx pre code {
+.mdx pre code {
   @apply text-sm bg-primary-dark text-green-300;
 }
 
@@ -65,6 +57,18 @@ pre {
   @apply border-4 rounded-full border-yellow-300 w-16 h-16;
   border-top-color: theme('colors.indigo.500');
   animation: spin 1s linear infinite;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 4rem solid transparent;
+  border-right: 4rem solid transparent;
+  border-top: 5rem solid #393232;
+}
+
+.shape-shadow {
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
 }
 
 .text-shadow {
