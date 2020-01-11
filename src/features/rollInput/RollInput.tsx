@@ -36,14 +36,19 @@ export const RollInput = () => {
       <div className="flex flex-col items-center">
         <form className="text-center" onSubmit={handleSubmit}>
           <label className="text-3xl">
-            Roll your dice
+            Enter formula
             <input
-              className="w-64 appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
+              className="text-lg w-64 appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
               type="text"
               value={currentRoll}
               onChange={e => dispatch(setCurrentRoll(e.target.value))}
             />
           </label>
+          <input
+            className="bg-transparent w-full text-2xl text-white py-1 mt-2 px-4 border border-yellow-700 rounded"
+            type="submit"
+            value="Roll"
+          />
         </form>
         <div className="w-full p-4 text-wrap">
           {error ? (
