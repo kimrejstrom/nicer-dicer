@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Router>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <main className="mb-16 bg-gray-100 text-yellow-100 bg-primary-dark flex-grow">
+        <main className="mb-20 bg-gray-100 text-yellow-100 bg-primary-dark flex-grow">
           <Header />
           <Switch>
             <Route path="/about">
