@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Dice } from 'components/Dice/Dice';
 
 export const Home: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ export const Home: React.FC = () => {
         <div className="text-white text-xl pb-4">
           The Ultimate RPG Dice Roller
         </div>
+        <Dice />
         <p className="mx-auto w-64 mb-6">
           The dice roller is very easy to use, simply type in the formula in the
           box and press enter. Nicer Dicer features support for a wide array of
@@ -17,6 +19,7 @@ export const Home: React.FC = () => {
           </Link>{' '}
           page.
         </p>
+        <Dice />
         <Link
           to="roller"
           className="bg-transparent text-lg text-yellow-500 py-2 px-4 border border-yellow-700 rounded"
