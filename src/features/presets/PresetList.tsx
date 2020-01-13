@@ -110,14 +110,14 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   const carouselSettings: CarouselProps = {
     wrapAround: true,
     slidesToShow: 2,
-    cellAlign: 'center',
-    slideWidth: 0.8,
+    cellAlign: 'left',
+    slideWidth: 1,
     transitionMode: 'scroll',
     withoutControls: true,
   };
 
   return (
-    <div className="flex flex-wrap items-center justify-center px-4 pt-4 max-w-md m-auto">
+    <div className="mt-4">
       <Carousel {...carouselSettings}>{renderedPresets}</Carousel>
     </div>
   );

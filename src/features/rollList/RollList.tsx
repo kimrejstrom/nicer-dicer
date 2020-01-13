@@ -9,10 +9,12 @@ export const RollList: React.FC = () => {
   const rollsState = useSelector((state: RootState) => state.rolls);
   // Render
   return (
-    <div className="m-auto w-64 rounded bg-secondary-dark p-2">
-      <div className="text-center text-xl text-yellow-200">Previous Rolls</div>
+    <div className="m-auto w-full rounded bg-secondary-dark mt-4 p-4">
+      <div className="text-center text-xl text-yellow-200 mb-2">
+        Previous Rolls
+      </div>
       {rollsState.rolls.length ? (
-        <div className="flex flex-wrap items-center justify-around w-56 m-auto">
+        <div className="flex flex-wrap items-center justify-around m-auto">
           {rollsState.rolls.map(roll => (
             <button
               onClick={() => dispatch(setCurrentRoll(roll))}

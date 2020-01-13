@@ -7,7 +7,7 @@ export const Roller: React.FC = () => {
   // Open presets
   const [presetsOpen, setPresetsOpen] = useState(false);
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8 max-w-xs p-4">
       <div className="flex justify-center items-center">
         <Button
           title={presetsOpen ? 'Hide Presets' : 'Show Presets'}

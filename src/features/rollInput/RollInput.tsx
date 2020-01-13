@@ -34,11 +34,11 @@ export const RollInput = () => {
   return (
     <div className="m-auto py-4">
       <div className="flex flex-col items-center">
-        <form className="text-center" onSubmit={handleSubmit}>
+        <form className="text-center w-full" onSubmit={handleSubmit}>
           <label className="text-3xl">
             Enter formula
             <input
-              className="text-lg w-64 appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
+              className="text-lg w-full appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none dark-focus:border-yellow-400"
               type="text"
               value={currentRoll}
               onChange={e => dispatch(setCurrentRoll(e.target.value))}
@@ -50,9 +50,9 @@ export const RollInput = () => {
             value="Roll"
           />
         </form>
-        <div className="w-full p-4 text-wrap">
+        <div className="w-full text-wrap">
           {error ? (
-            <div className="font-mono mb-6 m-auto w-11/12 md:w-2/3 lg:w-1/3">
+            <div className="font-mono mb-6 m-auto">
               <Alert title={'Something went wrong'} body={error.message} />
             </div>
           ) : (

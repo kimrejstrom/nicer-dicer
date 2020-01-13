@@ -65,7 +65,7 @@ pre {
 
 .spinner {
   @apply border-4 rounded-full border-yellow-300 w-16 h-16;
-  border-top-color: theme('colors.indigo.500');
+  border-top-color: theme('colors.yellow.500');
   animation: spin 1s linear infinite;
 }
 
