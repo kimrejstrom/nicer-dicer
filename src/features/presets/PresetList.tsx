@@ -114,6 +114,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     slideWidth: 1,
     transitionMode: 'scroll',
     withoutControls: true,
+    enableKeyboardControls: true,
   };
 
   return (

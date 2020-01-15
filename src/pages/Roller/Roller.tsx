@@ -12,7 +12,7 @@ export const Roller: React.FC = () => {
         <Button
           title={presetsOpen ? 'Hide Presets' : 'Show Presets'}
           onClick={() => setPresetsOpen(!presetsOpen)}
-          className="bg-transparent text-yellow-700 py-2 px-4 border border-yellow-900 rounded"
+          className="bg-transparent text-yellow-200 py-2 px-4 border border-yellow-700 rounded"
         />
       </div>
       {presetsOpen ? <PresetFeature /> : undefined}

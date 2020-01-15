@@ -15,8 +15,9 @@ export const RollList: React.FC = () => {
       </div>
       {rollsState.rolls.length ? (
         <div className="flex flex-wrap items-center justify-around m-auto">
-          {rollsState.rolls.map(roll => (
+          {rollsState.rolls.map((roll, index) => (
             <button
+              key={index}
               onClick={() => dispatch(setCurrentRoll(roll))}
               className="m-1 p-2 rounded-full bg-primary-dark"
             >

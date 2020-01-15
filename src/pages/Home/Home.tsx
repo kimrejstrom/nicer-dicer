@@ -22,7 +22,7 @@ export const Home: React.FC = () => {
         <Dice />
         <Link
           to="roller"
-          className="bg-transparent text-lg text-yellow-500 py-2 px-4 border border-yellow-700 rounded"
+          className="bg-transparent text-lg text-yellow-200 py-2 px-4 border border-yellow-700 rounded"
         >
           Get Started
         </Link>
