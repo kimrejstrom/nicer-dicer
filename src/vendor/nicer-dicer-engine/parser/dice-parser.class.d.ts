@@ -1,0 +1,31 @@
+import * as Ast from '../ast';
+import { Lexer } from '../lexer';
+import { BasicParser } from './basic-parser.class';
+import { ParseResult } from './parse-result.class';
+export declare class DiceParser extends BasicParser {
+    constructor(input: Lexer | string);
+    parse(): ParseResult;
+    parseExpression(result: ParseResult): Ast.ExpressionNode;
+    parseSimpleExpression(result: ParseResult): Ast.ExpressionNode;
+    parseTerm(result: ParseResult): Ast.ExpressionNode;
+    parseFactor(result: ParseResult): Ast.ExpressionNode;
+    parseSimpleFactor(result: ParseResult): Ast.ExpressionNode;
+    parseFunction(result: ParseResult): Ast.ExpressionNode;
+    parseString(result: ParseResult): Ast.ExpressionNode;
+    parseNumber(result: ParseResult): Ast.ExpressionNode;
+    parseBracketedExpression(result: ParseResult): Ast.ExpressionNode;
+    parseGroup(result: ParseResult): Ast.ExpressionNode;
+    parseRepeat(result: ParseResult, lhs: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseDice(result: ParseResult, rollTimes?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseDiceRoll(result: ParseResult, rollTimes?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseExplode(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseCritical(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseKeep(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseDrop(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseReroll(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseSort(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseSubtractFailure(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    parseCompareModifier(result: ParseResult, lhs?: Ast.ExpressionNode): Ast.ExpressionNode;
+    private parseDiceModifiers;
+    private parseGroupModifiers;
+}

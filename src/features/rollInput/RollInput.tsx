@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dice } from 'dice-typescript';
+import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +10,6 @@ import { RootState } from 'app/rootReducer';
 export const RollInput = () => {
   const dispatch = useDispatch();
 
-  // const [roll, setRoll] = useState('3d6');
   const [result, setResult] = useState();
   const [error, setError] = useState();
 
@@ -19,7 +18,9 @@ export const RollInput = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const dice = new Dice();
+    const dice = new Dice(undefined, undefined, {
+      renderExpressionDecorators: true,
+    });
     try {
       const rollResult = dice.roll(currentRoll);
       setResult(rollResult);

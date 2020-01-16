@@ -1,5 +1,5 @@
 import React from 'react';
-import { DiceResult } from 'dice-typescript';
+import { DiceResult } from 'vendor/nicer-dicer-engine';
 
 export const RollResult: React.FC<{ result?: DiceResult }> = ({ result }) => {
   // Render

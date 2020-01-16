@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var NodeType;
+(function (NodeType) {
+    NodeType[NodeType["Function"] = 'Function'] = "Function";
+    NodeType[NodeType["Group"] = 'Group'] = "Group";
+    NodeType[NodeType["Repeat"] = 'Repeat'] = "Repeat";
+    NodeType[NodeType["Add"] = 'Add'] = "Add";
+    NodeType[NodeType["Subtract"] = 'Subtract'] = "Subtract";
+    NodeType[NodeType["Negate"] = 'Negate'] = "Negate";
+    NodeType[NodeType["Exponent"] = 'Exponent'] = "Exponent";
+    NodeType[NodeType["Multiply"] = 'Multiply'] = "Multiply";
+    NodeType[NodeType["Divide"] = 'Divide'] = "Divide";
+    NodeType[NodeType["Modulo"] = 'Modulo'] = "Modulo";
+    NodeType[NodeType["Equal"] = 'Equal'] = "Equal";
+    NodeType[NodeType["Greater"] = 'Greater'] = "Greater";
+    NodeType[NodeType["GreaterOrEqual"] = 'GreaterOrEqual'] = "GreaterOrEqual";
+    NodeType[NodeType["Less"] = 'Less'] = "Less";
+    NodeType[NodeType["LessOrEqual"] = 'LessOrEqual'] = "LessOrEqual";
+    NodeType[NodeType["Explode"] = 'Explode'] = "Explode";
+    NodeType[NodeType["Keep"] = 'Keep'] = "Keep";
+    NodeType[NodeType["Drop"] = 'Drop'] = "Drop";
+    NodeType[NodeType["Critical"] = 'Critical'] = "Critical";
+    NodeType[NodeType["Reroll"] = 'Reroll'] = "Reroll";
+    NodeType[NodeType["Sort"] = 'Sort'] = "Sort";
+    NodeType[NodeType["SubtractFailure"] = 'SubtractFailure'] = "SubtractFailure";
+    NodeType[NodeType["Dice"] = 'Dice'] = "Dice";
+    NodeType[NodeType["DiceSides"] = 'DiceSides'] = "DiceSides";
+    NodeType[NodeType["DiceRoll"] = 'DiceRoll'] = "DiceRoll";
+    NodeType[NodeType["Number"] = 'Number'] = "Number";
+    NodeType[NodeType["String"] = 'String'] = "String";
+})(NodeType = exports.NodeType || (exports.NodeType = {}));
+//# sourceMappingURL=node-type.enum.js.map

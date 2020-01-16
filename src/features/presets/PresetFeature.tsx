@@ -13,7 +13,7 @@ export const PresetFeature = () => {
     {
       rollType: 'attack',
       defaultDie: 'd20',
-      formula: `{5+1d20....10}>=15`,
+      formula: `{5+1d20...10}>=15`,
       repeat: true,
       modifier: 'normal',
     },

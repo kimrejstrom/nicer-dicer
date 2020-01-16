@@ -1,0 +1,1 @@
+{"version":3,"file":"result.class.js","sourceRoot":"","sources":["../../src/interpreter/result.class.ts"],"names":[],"mappings":";;AAEA;IAKE,gBAAY,iBAAiC,EAAE,kBAA0B,EAAE,KAAa;QACtF,IAAI,CAAC,iBAAiB,GAAG,iBAAiB,CAAC;QAC3C,IAAI,CAAC,kBAAkB,GAAG,kBAAkB,CAAC;QAC7C,IAAI,CAAC,KAAK,GAAG,KAAK,CAAC;IACrB,CAAC;IACH,aAAC;AAAD,CAAC,AAVD,IAUC;AAVY,wBAAM"}
