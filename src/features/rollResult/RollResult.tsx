@@ -1,6 +1,35 @@
 import React from 'react';
 import { DiceResult } from 'vendor/nicer-dicer-engine';
 
+const parseExpression = (expression: string) => {
+  const result = expression.split('}');
+  const rolls = result[0].replace(/[{}]/g, '').split(';');
+  let renderedResult: JSX.Element[] = [];
+  if (result.length > 1) {
+    renderedResult.push(
+      <span key="target" className="font-bold">
+        Target: {result[1]}
+      </span>,
+    );
+  }
+
+  if (rolls.length > 1) {
+    renderedResult.push(
+      <div key="rolls" className="text-center">
+        {rolls.map((roll, index) => (
+          <span key={index}>
+            {roll}
+            <br />
+          </span>
+        ))}
+      </div>,
+    );
+  } else {
+    renderedResult.push(<span key="single">{rolls}</span>);
+  }
+  return renderedResult;
+};
+
 export const RollResult: React.FC<{ result?: DiceResult }> = ({ result }) => {
   // Render
   return (
@@ -22,8 +51,8 @@ export const RollResult: React.FC<{ result?: DiceResult }> = ({ result }) => {
           </div>
           <details className="m-auto text-center">
             <summary>View roll</summary>
-            <div className="font-mono p-2 bg-secondary-dark rounded">
-              {result.renderedExpression}
+            <div className="tracking-tight font-mono p-2 bg-secondary-dark rounded">
+              {parseExpression(result.renderedExpression)}
             </div>
           </details>
         </div>
