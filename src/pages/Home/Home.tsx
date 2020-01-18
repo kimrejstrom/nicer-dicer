@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Dice } from 'components/Dice/Dice';
+import { useServiceWorker, IServiceWorkerContext } from 'useServiceWorker';
 
 export const Home: React.FC = () => {
+  const { updateAssets } = useServiceWorker() as IServiceWorkerContext;
   return (
     <div className="container mx-auto mt-8 max-w-xs p-4">
       <div className="text-center">
@@ -26,6 +28,9 @@ export const Home: React.FC = () => {
         >
           Get Started
         </Link>
+        <button className="block mx-auto mt-10" onClick={updateAssets}>
+          Check for updates
+        </button>
       </div>
     </div>
   );
