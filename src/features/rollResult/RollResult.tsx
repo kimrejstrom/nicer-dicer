@@ -7,9 +7,11 @@ const parseExpression = (expression: string) => {
   let renderedResult: JSX.Element[] = [];
   if (result.length > 1) {
     renderedResult.push(
-      <span key="target" className="font-bold">
-        Target: {result[1]}
-      </span>,
+      <div key="target" className="font-bold mb-4">
+        <span className="border-b-2 border-yellow-200">
+          Target: {result[1]}
+        </span>
+      </div>,
     );
   }
 
