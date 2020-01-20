@@ -39,7 +39,7 @@ export const PresetForm: React.FC = () => {
         <label>
           Title
           <input
-            className="w-full appearance-none text-sm font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded mb-2 border border-yellow-700 focus:outline-none focus:border-yellow-400"
+            className="w-full text-lg appearance-none font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded mb-2 border border-yellow-700 focus:outline-none focus:border-yellow-400"
             type="text"
             name="title"
             required={true}
@@ -50,7 +50,7 @@ export const PresetForm: React.FC = () => {
         <label>
           Formula
           <input
-            className="w-full appearance-none text-sm font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded mb-2 border border-yellow-700 focus:outline-none focus:border-yellow-400"
+            className="w-full text-lg appearance-none font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded mb-2 border border-yellow-700 focus:outline-none focus:border-yellow-400"
             type="text"
             name="formula"
             required={true}
@@ -62,7 +62,7 @@ export const PresetForm: React.FC = () => {
           Dice type
           <div className="inline-block relative w-full">
             <select
-              className="relative w-full appearance-none text-sm font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded border border-yellow-700 focus:outline-none focus:border-yellow-400"
+              className="relative w-full appearance-none text-lg font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded border border-yellow-700 focus:outline-none focus:border-yellow-400"
               name="dice"
               value={inputs?.dice || ''}
               onChange={handleInputChange}
