@@ -1,5 +1,9 @@
 import React from 'react';
-import { Preset } from 'features/presets/presetsSlice';
+import {
+  Preset,
+  removePreset,
+  resetPresets,
+} from 'features/presets/presetsSlice';
 import { useDispatch } from 'react-redux';
 import { setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import d20 from 'images/d20.svg';
@@ -11,6 +15,7 @@ import d4 from 'images/d4.svg';
 import { Modal } from 'components/Modal/Modal';
 import { toggleModal } from 'components/Modal/modalSlice';
 import { PresetForm } from 'features/presets/PresetForm';
+import Button from 'components/Button/Button';
 
 export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   const dispatch = useDispatch();
@@ -22,44 +27,12 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
       style={{ width: '6.5rem' }}
     >
       <div
-        className="border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+        className="custom-bg border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
         style={{ height: '7rem' }}
       >
         <div className="text-center p-3 opacity-75 capitalize text-xs">
           Create
         </div>
-        <svg
-          className="absolute mb-2"
-          viewBox="0 0 375 283"
-          fill="none"
-          style={{ transform: 'scale(1.8)', opacity: 0.05 }}
-        >
-          <rect
-            x="160"
-            y="175"
-            width="150"
-            height="150"
-            rx="8"
-            transform="rotate(-45 160 175)"
-            fill="gray"
-          />
-          <rect
-            y="110"
-            width="130"
-            height="130"
-            rx="8"
-            transform="rotate(-45 0 110)"
-            fill="gray"
-          />
-        </svg>
-        <div
-          className="block absolute w-32 h-32 bottom-0 left-0"
-          style={{
-            background: 'radial-gradient(black, transparent 60%)',
-            transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)',
-            opacity: 0.1,
-          }}
-        ></div>
         <div className="flex justify-center">
           <span className="absolute top-0 mt-10 text-white fill-current opacity-75">
             <svg
@@ -109,57 +82,39 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     }
     return (
       <div
-        onClick={() => dispatch(setCurrentRoll(preset.formula))}
         key={index}
         className="cursor-pointer block text-yellow-100"
         style={{ width: '6.5rem' }}
       >
         <div
-          className="border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+          className="custom-bg border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
           style={{ height: '7rem' }}
         >
-          <div className="p-3 pb-2 opacity-75 capitalize text-xs">
-            {preset.rollType}
-          </div>
           <img
             src={icon}
-            className="absolute opacity-75 top-0 right-0 w-10 px-2 py-2 shape-shadow"
+            className="opacity-75 w-8 px-1 py-1 shape-shadow"
             alt="logo"
           />
-          <svg
-            className="absolute mb-2"
-            viewBox="0 0 375 283"
-            fill="none"
-            style={{ transform: 'scale(1.8)', opacity: 0.05 }}
+          <button
+            onClick={() => dispatch(removePreset(index))}
+            className="z-40 absolute opacity-75 top-0 right-0 shape-shadow"
           >
-            <rect
-              x="160"
-              y="175"
-              width="150"
-              height="150"
-              rx="8"
-              transform="rotate(-45 160 175)"
-              fill="gray"
-            />
-            <rect
-              y="110"
-              width="130"
-              height="130"
-              rx="8"
-              transform="rotate(-45 0 110)"
-              fill="gray"
-            />
-          </svg>
+            <svg
+              className="fill-current h-6 w-6 text-gray-200 opacity-50"
+              style={{ transform: 'scale(0.7)' }}
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+            </svg>
+          </button>
           <div
-            className="block absolute w-32 h-32 bottom-0 left-0"
-            style={{
-              background: 'radial-gradient(black, transparent 60%)',
-              transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)',
-              opacity: 0.1,
-            }}
-          ></div>
-          <div className="flex justify-center">
-            <div className="text-md text-center text-white font-bold p-1 tracking-tighter leading-none">
+            onClick={() => dispatch(setCurrentRoll(preset.formula))}
+            className="z-40 flex justify-center"
+          >
+            <div className="text-md text-center text-white font-bold px-1 -mt-2 pt-2 -mb-4 pb-4 tracking-tighter leading-none">
               {preset.title}
             </div>
           </div>
@@ -177,7 +132,14 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     <>
       <Modal title="Add Preset" content={<PresetForm />} />
       <div className="h-32 mt-4 flex flex-wrap justify-center overflow-scroll">
-        {[<AddNew key="addNew" />].concat(renderedPresets)}
+        {[<AddNew key="addNew" />].concat(renderedPresets.reverse())}
+      </div>
+      <div className="flex justify-center mt-4">
+        <Button
+          className="m-auto bg-transparent text-yellow-200 py-1 hover:bg-primary-dark px-4 border border-yellow-700 rounded"
+          title="Reset defaults"
+          onClick={() => dispatch(resetPresets())}
+        />
       </div>
     </>
   );

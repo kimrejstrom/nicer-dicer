@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 export const useForm = (callback: any) => {
   const [inputs, setInputs] = useState();
@@ -10,7 +10,9 @@ export const useForm = (callback: any) => {
     callback();
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     e.persist();
     setInputs((inputs: any) => ({
       ...inputs,

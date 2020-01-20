@@ -7,7 +7,7 @@ interface RollsState {
 
 const initialState: RollsState = {
   rolls: [],
-  currentRoll: '3d6+2',
+  currentRoll: '5+2d20',
 };
 
 const rollInputSlice = createSlice({

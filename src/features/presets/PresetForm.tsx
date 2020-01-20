@@ -18,8 +18,7 @@ export const PresetForm: React.FC = () => {
       dice.roll(inputs.formula);
       // TODO: parse form fields
       const newPreset: Preset = {
-        rollType: 'damage',
-        defaultDie: 'd6',
+        defaultDie: inputs.dice,
         formula: inputs.formula,
         title: inputs.title,
       };
@@ -59,7 +58,34 @@ export const PresetForm: React.FC = () => {
             onChange={handleInputChange}
           />
         </label>
-        <div className="flex justify-end pt-2">
+        <label>
+          Dice type
+          <div className="inline-block relative w-full">
+            <select
+              className="relative w-full appearance-none text-sm font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded border border-yellow-700 focus:outline-none focus:border-yellow-400"
+              name="dice"
+              value={inputs?.dice || ''}
+              onChange={handleInputChange}
+            >
+              <option value="d4">d4</option>
+              <option value="d6">d6</option>
+              <option value="d8">d8</option>
+              <option value="d10">d10</option>
+              <option value="d12">d12</option>
+              <option value="d20">d20</option>
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-200 opacity-75">
+              <svg
+                className="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
+          </div>
+        </label>
+        <div className="flex justify-end mt-4 pt-2">
           <input
             className="bg-transparent text-yellow-200 py-1 hover:bg-primary-dark px-4 border border-yellow-700 rounded"
             type="submit"
