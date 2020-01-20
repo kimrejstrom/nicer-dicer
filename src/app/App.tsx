@@ -6,6 +6,7 @@ import { Home } from 'pages/Home/Home';
 import { About } from 'pages/About/About';
 import { Roller } from 'pages/Roller/Roller';
 import { useServiceWorker, IServiceWorkerContext } from 'useServiceWorker';
+import Button from 'components/Button/Button';
 
 const App: React.FC = () => {
   const {
@@ -30,13 +31,11 @@ const App: React.FC = () => {
                 </span>
                 <div>
                   A new version is available
-                  <button
-                    className="bg-secondary-dark text-yellow-100 py-1 px-2 border border-yellow-600 rounded ml-4"
-                    type="button"
+                  <Button
+                    className="hover:bg-primary-dark bg-secondary-dark text-yellow-100 py-1 px-2 border border-yellow-600 rounded ml-4"
                     onClick={updateAssets}
-                  >
-                    Update now
-                  </button>
+                    title="Update now"
+                  />
                 </div>
               </div>
             </div>

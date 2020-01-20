@@ -6,7 +6,7 @@ import { useServiceWorker, IServiceWorkerContext } from 'useServiceWorker';
 export const Home: React.FC = () => {
   const { updateAssets } = useServiceWorker() as IServiceWorkerContext;
   return (
-    <div className="container mx-auto mt-8 max-w-xs p-4">
+    <div className="container mx-auto mt-8 max-w-xs pt-4">
       <div className="text-center">
         <div className="text-white text-xl pb-4">
           The Ultimate RPG Dice Roller

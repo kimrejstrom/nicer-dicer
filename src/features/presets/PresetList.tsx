@@ -1,6 +1,5 @@
 import React from 'react';
-import Carousel, { CarouselProps } from 'nuka-carousel';
-import { Preset } from 'features/presets/PresetFeature';
+import { Preset } from 'features/presets/presetsSlice';
 import { useDispatch } from 'react-redux';
 import { setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import d20 from 'images/d20.svg';
@@ -9,9 +8,80 @@ import d10 from 'images/d10.svg';
 import d8 from 'images/d8.svg';
 import d6 from 'images/d6.svg';
 import d4 from 'images/d4.svg';
+import { Modal } from 'components/Modal/Modal';
+import { toggleModal } from 'components/Modal/modalSlice';
+import { PresetForm } from 'features/presets/PresetForm';
 
 export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   const dispatch = useDispatch();
+
+  const AddNew: React.FC<{}> = () => (
+    <div
+      onClick={() => dispatch(toggleModal(true))}
+      className="cursor-pointer block text-yellow-100"
+      style={{ width: '6.5rem' }}
+    >
+      <div
+        className="border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+        style={{ height: '7rem' }}
+      >
+        <div className="text-center p-3 opacity-75 capitalize text-xs">
+          Create
+        </div>
+        <svg
+          className="absolute mb-2"
+          viewBox="0 0 375 283"
+          fill="none"
+          style={{ transform: 'scale(1.8)', opacity: 0.05 }}
+        >
+          <rect
+            x="160"
+            y="175"
+            width="150"
+            height="150"
+            rx="8"
+            transform="rotate(-45 160 175)"
+            fill="gray"
+          />
+          <rect
+            y="110"
+            width="130"
+            height="130"
+            rx="8"
+            transform="rotate(-45 0 110)"
+            fill="gray"
+          />
+        </svg>
+        <div
+          className="block absolute w-32 h-32 bottom-0 left-0"
+          style={{
+            background: 'radial-gradient(black, transparent 60%)',
+            transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)',
+            opacity: 0.1,
+          }}
+        ></div>
+        <div className="flex justify-center">
+          <span className="absolute top-0 mt-10 text-white fill-current opacity-75">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              style={{ transform: 'scale(2)' }}
+            >
+              <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z" />
+            </svg>
+          </span>
+        </div>
+        <div className="w-full bg-secondary-dark absolute bottom-0 text-white px-2 py-2 leading-none">
+          <div className="text-center opacity-75 capitalize text-xs overflow-hidden">
+            New Preset
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderedPresets = presets.map((preset, index) => {
     let icon;
     switch (preset.defaultDie) {
@@ -41,85 +111,74 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
       <div
         onClick={() => dispatch(setCurrentRoll(preset.formula))}
         key={index}
-        className="block text-yellow-100 border border-yellow-900 bg-secondary-dark m-1 relative overflow-hidden rounded-lg shadow-lg"
+        className="cursor-pointer block text-yellow-100"
+        style={{ width: '6.5rem' }}
       >
-        <img
-          src={icon}
-          className="absolute opacity-75 top-0 right-0 w-10 px-2 py-2 shape-shadow"
-          alt="logo"
-        />
-        <svg
-          className="absolute mb-2"
-          viewBox="0 0 375 283"
-          fill="none"
-          style={{ transform: 'scale(1.8)', opacity: 0.05 }}
+        <div
+          className="border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+          style={{ height: '7rem' }}
         >
-          <rect
-            x="160"
-            y="175"
-            width="150"
-            height="150"
-            rx="8"
-            transform="rotate(-45 160 175)"
-            fill="gray"
+          <div className="p-3 pb-2 opacity-75 capitalize text-xs">
+            {preset.rollType}
+          </div>
+          <img
+            src={icon}
+            className="absolute opacity-75 top-0 right-0 w-10 px-2 py-2 shape-shadow"
+            alt="logo"
           />
-          <rect
-            y="110"
-            width="130"
-            height="130"
-            rx="8"
-            transform="rotate(-45 0 110)"
-            fill="gray"
-          />
-        </svg>
-        <div className="relative pt-4 flex items-center justify-center">
+          <svg
+            className="absolute mb-2"
+            viewBox="0 0 375 283"
+            fill="none"
+            style={{ transform: 'scale(1.8)', opacity: 0.05 }}
+          >
+            <rect
+              x="160"
+              y="175"
+              width="150"
+              height="150"
+              rx="8"
+              transform="rotate(-45 160 175)"
+              fill="gray"
+            />
+            <rect
+              y="110"
+              width="130"
+              height="130"
+              rx="8"
+              transform="rotate(-45 0 110)"
+              fill="gray"
+            />
+          </svg>
           <div
-            className="block absolute w-16 h-20 bottom-0 left-0 mb-24 ml-3"
+            className="block absolute w-32 h-32 bottom-0 left-0"
             style={{
               background: 'radial-gradient(black, transparent 60%)',
               transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)',
               opacity: 0.1,
             }}
           ></div>
-          <div className="block py-6">
-            <span className="text-xl text-white font-bold text-shadow">
+          <div className="flex justify-center">
+            <div className="text-md text-center text-white font-bold p-1 tracking-tighter leading-none">
+              {preset.title}
+            </div>
+          </div>
+          <div className="w-full bg-secondary-dark absolute bottom-0 text-white px-2 py-2 leading-none">
+            <div className="text-center opacity-75 capitalize text-xs overflow-hidden">
               {preset.formula}
-            </span>
-          </div>
-        </div>
-        <div className="bg-secondary-dark relative text-white px-2 py-2 leading-none">
-          <div className="flex justify-between items-center">
-            <span className="opacity-75 capitalize text-xs">
-              {preset.repeat ? 'Multiple' : 'Single'}
-            </span>
-            <span className="opacity-75 capitalize text-xs">
-              {preset.modifier}
-            </span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="font-semibold text-sm">{preset.rollType}</span>
-            <span className="capitalize text-sm font-bold">
-              {preset.defaultDie}
-            </span>
+            </div>
           </div>
         </div>
       </div>
     );
   });
 
-  const carouselSettings: CarouselProps = {
-    wrapAround: true,
-    slidesToShow: 2,
-    cellAlign: 'left',
-    slideWidth: 1,
-    transitionMode: 'scroll',
-    withoutControls: true,
-    enableKeyboardControls: true,
-  };
-
   return (
-    <div className="mt-4">
-      <Carousel {...carouselSettings}>{renderedPresets}</Carousel>
-    </div>
+    <>
+      <Modal title="Add Preset" content={<PresetForm />} />
+      <div className="h-32 mt-4 flex flex-wrap justify-center overflow-scroll">
+        {[<AddNew key="addNew" />].concat(renderedPresets)}
+      </div>
+    </>
   );
 };

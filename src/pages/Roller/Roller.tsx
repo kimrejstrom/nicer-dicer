@@ -7,12 +7,12 @@ export const Roller: React.FC = () => {
   // Open presets
   const [presetsOpen, setPresetsOpen] = useState(false);
   return (
-    <div className="container mx-auto mt-8 max-w-xs p-4">
+    <div className="container mx-auto mt-8 max-w-xs pt-4">
       <div className="flex justify-center items-center">
         <Button
           title={presetsOpen ? 'Hide Presets' : 'Show Presets'}
           onClick={() => setPresetsOpen(!presetsOpen)}
-          className="bg-transparent text-yellow-200 py-2 px-4 border border-yellow-700 rounded"
+          className="hover:bg-secondary-dark bg-transparent text-yellow-200 py-2 px-4 border border-yellow-700 rounded"
         />
       </div>
       {presetsOpen ? <PresetFeature /> : undefined}
