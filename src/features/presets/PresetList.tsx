@@ -24,17 +24,17 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     <div
       onClick={() => dispatch(toggleModal(true))}
       className="cursor-pointer block text-yellow-100"
-      style={{ width: '6.5rem' }}
+      style={{ width: '9.5rem' }}
     >
       <div
-        className="custom-bg border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
-        style={{ height: '7rem' }}
+        className="custom-bg border border-yellow-900 bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+        style={{ height: '9rem' }}
       >
-        <div className="text-center p-3 opacity-75 capitalize text-xs">
+        <div className="text-center p-3 opacity-75 capitalize text-md">
           Create
         </div>
-        <div className="flex justify-center">
-          <span className="absolute top-0 mt-10 text-white fill-current opacity-75">
+        <div className="flex justify-center items-center">
+          <span className="mt-2 text-white fill-current opacity-75">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
           </span>
         </div>
         <div className="w-full bg-secondary-dark absolute bottom-0 text-white px-2 py-2 leading-none">
-          <div className="text-center opacity-75 capitalize text-xs overflow-hidden">
+          <div className="text-center opacity-75 capitalize text-md overflow-hidden">
             New Preset
           </div>
         </div>
@@ -83,43 +83,62 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
     return (
       <div
         key={index}
-        className="cursor-pointer block text-yellow-100"
-        style={{ width: '6.5rem' }}
+        className="block text-yellow-100"
+        style={{ width: '9.5rem' }}
       >
         <div
           className="custom-bg border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
-          style={{ height: '7rem' }}
+          style={{ height: '9rem' }}
         >
-          <img
-            src={icon}
-            className="opacity-75 w-8 px-1 py-1 shape-shadow"
-            alt="logo"
-          />
-          <button
-            onClick={() => dispatch(removePreset(index))}
-            className="z-40 absolute opacity-75 top-0 right-0 shape-shadow"
-          >
-            <svg
-              className="fill-current h-6 w-6 text-gray-200 opacity-50"
-              style={{ transform: 'scale(0.7)' }}
-              role="button"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+          <div className="flex justify-between h-10">
+            <button
+              onClick={() => dispatch(removePreset(index))}
+              className="z-40 opacity-75 shape-shadow p-2"
             >
-              <title>Close</title>
-              <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
-            </svg>
-          </button>
+              <svg
+                className="fill-current h-6 w-6 text-gray-200 opacity-50"
+                style={{ transform: 'scale(0.8)' }}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+              >
+                <path d="M6.3 12.3l10-10a1 1 0 0 1 1.4 0l4 4a1 1 0 0 1 0 1.4l-10 10a1 1 0 0 1-.7.3H7a1 1 0 0 1-1-1v-4a1 1 0 0 1 .3-.7zM8 16h2.59l9-9L17 4.41l-9 9V16zm10-2a1 1 0 0 1 2 0v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6c0-1.1.9-2 2-2h6a1 1 0 0 1 0 2H4v14h14v-6z" />
+              </svg>
+            </button>
+            <img
+              src={icon}
+              className="opacity-75 w-10 pt-2 shape-shadow"
+              alt="logo"
+            />
+            <button
+              onClick={() => dispatch(removePreset(index))}
+              className="z-40 opacity-75 shape-shadow p-2"
+            >
+              <svg
+                className="fill-current h-6 w-6 text-gray-200 opacity-50"
+                style={{ transform: 'scale(1)' }}
+                role="button"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <title>Close</title>
+                <path d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z" />
+              </svg>
+            </button>
+          </div>
+
           <div
             onClick={() => dispatch(setCurrentRoll(preset.formula))}
-            className="z-40 flex justify-center"
+            className="z-40 flex justify-center pt-3"
+            style={{ height: '6rem' }}
           >
-            <div className="text-md text-center text-white font-bold px-1 -mt-2 pt-2 -mb-4 pb-4 tracking-tighter leading-none">
+            <div className="text-xl text-center text-white font-bold px-2 tracking-tighter leading-none">
               {preset.title}
             </div>
           </div>
           <div className="w-full bg-secondary-dark absolute bottom-0 text-white px-2 py-2 leading-none">
-            <div className="text-center opacity-75 capitalize text-xs overflow-hidden">
+            <div className="text-center opacity-75 capitalize text-md overflow-hidden">
               {preset.formula}
             </div>
           </div>
@@ -131,7 +150,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   return (
     <>
       <Modal title="Add Preset" content={<PresetForm />} />
-      <div className="h-32 mt-4 flex flex-wrap justify-center overflow-scroll">
+      <div className="h-40 mt-4 flex flex-wrap justify-center overflow-scroll">
         {[<AddNew key="addNew" />].concat(renderedPresets.reverse())}
       </div>
       <div className="flex justify-center mt-4">
