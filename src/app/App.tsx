@@ -7,12 +7,20 @@ import { About } from 'pages/About/About';
 import { Roller } from 'pages/Roller/Roller';
 import { useServiceWorker, IServiceWorkerContext } from 'useServiceWorker';
 import Button from 'components/Button/Button';
+import { Modal } from 'components/Modal/Modal';
+import { useSelector } from 'react-redux';
+import { RootState } from 'app/rootReducer';
 
 const App: React.FC = () => {
   const {
     isUpdateAvailable,
     updateAssets,
   } = useServiceWorker() as IServiceWorkerContext;
+
+  // Get modal state
+  const { title, content } = useSelector(
+    (state: RootState) => state.modalVisibility,
+  );
 
   return (
     <div className={`flex flex-col min-h-screen theme`}>
@@ -52,6 +60,7 @@ const App: React.FC = () => {
               <Home />
             </Route>
           </Switch>
+          <Modal title={title} content={content} />
         </main>
         <Navigation />
       </Router>

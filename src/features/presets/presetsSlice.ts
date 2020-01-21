@@ -47,6 +47,9 @@ const presetsSlice = createSlice({
     addPreset(state, action: PayloadAction<Preset>) {
       state.presets.push(action.payload);
     },
+    updatePreset(state, action: PayloadAction<{ preset: Preset; id: number }>) {
+      state.presets[action.payload.id] = action.payload.preset;
+    },
     removePreset(state, action: PayloadAction<number>) {
       state.presets.splice(action.payload, 1);
     },
@@ -56,6 +59,11 @@ const presetsSlice = createSlice({
   },
 });
 
-export const { addPreset, removePreset, resetPresets } = presetsSlice.actions;
+export const {
+  addPreset,
+  updatePreset,
+  removePreset,
+  resetPresets,
+} = presetsSlice.actions;
 
 export default presetsSlice.reducer;

@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addPreset } from 'features/presets/presetsSlice';
+import { addPreset, updatePreset } from 'features/presets/presetsSlice';
 import { Preset } from 'features/presets/presetsSlice';
 import { useForm } from 'utils/customHooks';
 import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 
-export const PresetForm: React.FC = () => {
+export const PresetForm: React.FC<{
+  existingInputs?: any;
+}> = ({ existingInputs }) => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
@@ -16,22 +18,30 @@ export const PresetForm: React.FC = () => {
     try {
       // check if formula is valid
       dice.roll(inputs.formula);
-      // TODO: parse form fields
+
       const newPreset: Preset = {
         defaultDie: inputs.dice,
         formula: inputs.formula,
         title: inputs.title,
       };
       setError(undefined);
-      setSuccess('Preset Added');
-      dispatch(addPreset(newPreset));
+      if (existingInputs) {
+        setSuccess('Preset Updated');
+        dispatch(updatePreset({ preset: newPreset, id: existingInputs.id }));
+      } else {
+        setSuccess('Preset Added');
+        dispatch(addPreset(newPreset));
+      }
     } catch (error) {
       setError(error);
       setSuccess(undefined);
     }
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(submitPreset);
+  const { inputs, handleInputChange, handleSubmit } = useForm(
+    submitPreset,
+    existingInputs,
+  );
   return (
     <div className="flex flex-col items-center">
       <div className="text-lg text-green-300">{success}</div>

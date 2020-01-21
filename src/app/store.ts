@@ -1,4 +1,4 @@
-import { configureStore, Action } from '@reduxjs/toolkit';
+import { configureStore, Action, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import localForage from 'localforage';
@@ -13,9 +13,13 @@ const persistConfig = {
 
 // Middleware: Redux Persist Persisted Reducer
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+const customizedMiddleware = getDefaultMiddleware({
+  serializableCheck: false,
+});
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware: customizedMiddleware,
 });
 
 let persistor = persistStore(store);

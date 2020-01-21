@@ -38,7 +38,7 @@ export const RollResult: React.FC<{ result?: DiceResult }> = ({ result }) => {
     <div className="m-auto">
       {result ? (
         <div className="mb-4">
-          <div className="m-auto flex items-center justify-center space-between text-lg">
+          <div className="m-auto flex items-center justify-center text-lg">
             <div className="p-2">
               Total: <b className="text-2xl">{result.total}</b>
             </div>

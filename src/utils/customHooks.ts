@@ -8,8 +8,8 @@ export const useQuery = () => {
 };
 
 // A custom hook to handle controlled forms
-export const useForm = (callback: any) => {
-  const [inputs, setInputs] = useState();
+export const useForm = (callback: () => void, existingInputs?: any) => {
+  const [inputs, setInputs] = useState(existingInputs);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (e) {
@@ -22,8 +22,8 @@ export const useForm = (callback: any) => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     e.persist();
-    setInputs((inputs: any) => ({
-      ...inputs,
+    setInputs((prevState: any) => ({
+      ...prevState,
       [e.target.name]: e.target.value,
     }));
   };

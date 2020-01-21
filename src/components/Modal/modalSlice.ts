@@ -1,19 +1,24 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IModal } from 'components/Modal/Modal';
 
-interface ModalState {
+interface ModalState extends IModal {
   visible: boolean;
 }
 
 const initialState: ModalState = {
   visible: false,
+  title: undefined,
+  content: undefined,
 };
 
 const modalSlice = createSlice({
   name: 'modalVisibility',
   initialState: initialState,
   reducers: {
-    toggleModal(state, action) {
-      state.visible = action.payload;
+    toggleModal(state, action: PayloadAction<ModalState>) {
+      state.content = action.payload.content;
+      state.title = action.payload.title;
+      state.visible = action.payload.visible;
     },
   },
 });

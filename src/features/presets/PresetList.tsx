@@ -12,48 +12,12 @@ import d10 from 'images/d10.svg';
 import d8 from 'images/d8.svg';
 import d6 from 'images/d6.svg';
 import d4 from 'images/d4.svg';
-import { Modal } from 'components/Modal/Modal';
 import { toggleModal } from 'components/Modal/modalSlice';
 import { PresetForm } from 'features/presets/PresetForm';
 import Button from 'components/Button/Button';
 
 export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
   const dispatch = useDispatch();
-
-  const AddNew: React.FC<{}> = () => (
-    <div
-      onClick={() => dispatch(toggleModal(true))}
-      className="cursor-pointer block text-yellow-100"
-      style={{ width: '9.5rem' }}
-    >
-      <div
-        className="custom-bg border border-yellow-900 bg-secondary-dark m-1 relative rounded-lg shadow-lg"
-        style={{ height: '9rem' }}
-      >
-        <div className="text-center p-3 opacity-75 capitalize text-md">
-          Create
-        </div>
-        <div className="flex justify-center items-center">
-          <span className="mt-2 text-white fill-current opacity-75">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="24"
-              height="24"
-              style={{ transform: 'scale(2)' }}
-            >
-              <path d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z" />
-            </svg>
-          </span>
-        </div>
-        <div className="w-full bg-secondary-dark absolute bottom-0 text-white px-2 py-2 leading-none">
-          <div className="text-center opacity-75 capitalize text-md overflow-hidden">
-            New Preset
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 
   const renderedPresets = presets.map((preset, index) => {
     let icon;
@@ -81,18 +45,31 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
         break;
     }
     return (
-      <div
-        key={index}
-        className="block text-yellow-100"
-        style={{ width: '9.5rem' }}
-      >
+      <div key={index} className="block text-yellow-100 w-40">
         <div
-          className="custom-bg border border-yellow-900 overflow-hidden bg-secondary-dark m-1 relative rounded-lg shadow-lg"
+          className="custom-bg border border-yellow-900 overflow-hidden m-1 bg-secondary-dark relative rounded-lg shadow-lg"
           style={{ height: '9rem' }}
         >
           <div className="flex justify-between h-10">
             <button
-              onClick={() => dispatch(removePreset(index))}
+              onClick={() =>
+                dispatch(
+                  toggleModal({
+                    visible: true,
+                    title: 'Edit Preset',
+                    content: (
+                      <PresetForm
+                        existingInputs={{
+                          title: preset.title,
+                          formula: preset.formula,
+                          dice: preset.defaultDie,
+                          id: index,
+                        }}
+                      />
+                    ),
+                  }),
+                )
+              }
               className="z-40 opacity-75 shape-shadow p-2"
             >
               <svg
@@ -130,8 +107,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
 
           <div
             onClick={() => dispatch(setCurrentRoll(preset.formula))}
-            className="z-40 flex justify-center pt-3"
-            style={{ height: '6rem' }}
+            className="cursor-pointer h-24 z-40 flex justify-center pt-3"
           >
             <div className="text-xl text-center text-white font-bold px-2 tracking-tighter leading-none">
               {preset.title}
@@ -149,16 +125,30 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
 
   return (
     <>
-      <Modal title="Add Preset" content={<PresetForm />} />
-      <div className="h-40 mt-4 flex flex-wrap justify-center overflow-scroll">
-        {[<AddNew key="addNew" />].concat(renderedPresets.reverse())}
+      <div className="w-full">
+        <div className="flex justify-center mt-4">
+          <Button
+            className="w-2/5 m-1 bg-transparent text-yellow-200 py-1 hover:bg-primary-dark px-4 border border-yellow-700 rounded"
+            title="Add Preset"
+            onClick={() =>
+              dispatch(
+                toggleModal({
+                  visible: true,
+                  title: 'Add Preset',
+                  content: <PresetForm />,
+                }),
+              )
+            }
+          />
+          <Button
+            className="w-2/5 m-1 bg-transparent text-yellow-200 py-1 hover:bg-primary-dark px-4 border border-yellow-700 rounded"
+            title="Reset defaults"
+            onClick={() => dispatch(resetPresets())}
+          />
+        </div>
       </div>
-      <div className="flex justify-center mt-4">
-        <Button
-          className="m-auto bg-transparent text-yellow-200 py-1 hover:bg-primary-dark px-4 border border-yellow-700 rounded"
-          title="Reset defaults"
-          onClick={() => dispatch(resetPresets())}
-        />
+      <div className="h-40 mt-4 flex flex-wrap justify-between overflow-scroll">
+        {renderedPresets.reverse()}
       </div>
     </>
   );

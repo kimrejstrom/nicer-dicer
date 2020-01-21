@@ -5,8 +5,8 @@ import { toggleModal } from 'components/Modal/modalSlice';
 // import Button from 'components/Button/Button';
 
 export interface IModal {
-  title: string;
-  content: JSX.Element;
+  title?: string;
+  content?: JSX.Element;
 }
 
 export const Modal: React.FC<IModal> = ({ title, content }) => {
@@ -20,7 +20,7 @@ export const Modal: React.FC<IModal> = ({ title, content }) => {
 
       <div className="modal-container bg-secondary-dark w-11/12 max-w-sm mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div
-          onClick={() => dispatch(toggleModal(false))}
+          onClick={() => dispatch(toggleModal({ visible: false }))}
           className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
         >
           <svg
@@ -38,7 +38,7 @@ export const Modal: React.FC<IModal> = ({ title, content }) => {
           <div className="flex justify-between items-center pb-3">
             <p className="text-2xl font-bold">{title}</p>
             <div
-              onClick={() => dispatch(toggleModal(false))}
+              onClick={() => dispatch(toggleModal({ visible: false }))}
               className="modal-close cursor-pointer z-50"
             >
               <svg
