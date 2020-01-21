@@ -13,6 +13,11 @@ export interface Preset {
 export const presetsInitialState: PresetsState = {
   presets: [
     {
+      defaultDie: 'd10',
+      formula: `2d10r<=1`,
+      title: 'Re-roll 1s',
+    },
+    {
       defaultDie: 'd6',
       formula: `2+2d6kh`,
       title: 'd6+mod w/ advantage',
