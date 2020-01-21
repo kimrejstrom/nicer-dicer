@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRoll, setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import { RollList } from 'features/rollList/RollList';
 import { RootState } from 'app/rootReducer';
+import { useQuery } from 'utils/customHooks';
+import { useHistory } from 'react-router-dom';
 
 export const RollInput = () => {
   const dispatch = useDispatch();
@@ -14,7 +16,17 @@ export const RollInput = () => {
   const [error, setError] = useState();
 
   // Get currentRoll from Redux
-  const { currentRoll } = useSelector((state: RootState) => state.rolls);
+  const { currentRoll, rolls } = useSelector((state: RootState) => state.rolls);
+  const query = useQuery();
+  const history = useHistory();
+
+  useEffect(() => {
+    const rollQuery = query.get('roll');
+    if (rollQuery && !rolls.length) {
+      const queryRoll = decodeURIComponent(rollQuery);
+      dispatch(setCurrentRoll(queryRoll));
+    }
+  });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,6 +38,7 @@ export const RollInput = () => {
       setResult(rollResult);
       setError(undefined);
       dispatch(addRoll(currentRoll));
+      history.push(`/roller?roll=${encodeURIComponent(currentRoll)}`);
     } catch (error) {
       setError(error);
     }

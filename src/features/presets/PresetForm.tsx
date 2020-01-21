@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPreset } from 'features/presets/presetsSlice';
 import { Preset } from 'features/presets/presetsSlice';
-import { useForm } from 'components/Form/Form';
+import { useForm } from 'utils/customHooks';
 import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 

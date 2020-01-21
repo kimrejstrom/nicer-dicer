@@ -7,7 +7,7 @@ interface RollsState {
 
 const initialState: RollsState = {
   rolls: [],
-  currentRoll: '5+2d20',
+  currentRoll: '{5+1d20}>=15',
 };
 
 const rollInputSlice = createSlice({

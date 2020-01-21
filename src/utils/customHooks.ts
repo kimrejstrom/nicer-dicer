@@ -1,5 +1,13 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+export const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+};
+
+// A custom hook to handle controlled forms
 export const useForm = (callback: any) => {
   const [inputs, setInputs] = useState();
 
