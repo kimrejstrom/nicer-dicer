@@ -17,7 +17,7 @@ describe('presets reducer', () => {
         {
           type: addPreset.type,
           payload: {
-            defaultDie: 'd20',
+            diceType: 'd20',
             formula: `1d20`,
             title: 'One d20',
           },
@@ -26,7 +26,7 @@ describe('presets reducer', () => {
     ).toEqual({
       presets: [
         {
-          defaultDie: 'd20',
+          diceType: 'd20',
           formula: `1d20`,
           title: 'One d20',
         },
@@ -38,7 +38,7 @@ describe('presets reducer', () => {
         {
           presets: [
             {
-              defaultDie: 'd20',
+              diceType: 'd20',
               formula: `1d20`,
               title: 'One d20',
             },
@@ -47,7 +47,7 @@ describe('presets reducer', () => {
         {
           type: addPreset.type,
           payload: {
-            defaultDie: 'd10',
+            diceType: 'd10',
             formula: `1d10`,
             title: 'One d10',
           },
@@ -56,12 +56,12 @@ describe('presets reducer', () => {
     ).toEqual({
       presets: [
         {
-          defaultDie: 'd20',
+          diceType: 'd20',
           formula: `1d20`,
           title: 'One d20',
         },
         {
-          defaultDie: 'd10',
+          diceType: 'd10',
           formula: `1d10`,
           title: 'One d10',
         },
@@ -75,12 +75,12 @@ describe('presets reducer', () => {
         {
           presets: [
             {
-              defaultDie: 'd20',
+              diceType: 'd20',
               formula: `1d20`,
               title: 'One d20',
             },
             {
-              defaultDie: 'd10',
+              diceType: 'd10',
               formula: `1d10`,
               title: 'One d10',
             },
@@ -94,7 +94,7 @@ describe('presets reducer', () => {
     ).toEqual({
       presets: [
         {
-          defaultDie: 'd20',
+          diceType: 'd20',
           formula: `1d20`,
           title: 'One d20',
         },

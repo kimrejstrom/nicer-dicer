@@ -4,8 +4,9 @@ export interface PresetsState {
   presets: Preset[];
 }
 
+export type DiceType = 'd4' | 'd6' | 'd8' | 'd10' | 'd12' | 'd20';
 export interface Preset {
-  defaultDie: 'd4' | 'd6' | 'd8' | 'd10' | 'd12' | 'd20';
+  diceType: DiceType;
   formula: string;
   title: string;
 }
@@ -13,32 +14,32 @@ export interface Preset {
 export const presetsInitialState: PresetsState = {
   presets: [
     {
-      defaultDie: 'd10',
+      diceType: 'd10',
       formula: `2d10r<=1`,
       title: 'Re-roll 1s',
     },
     {
-      defaultDie: 'd6',
+      diceType: 'd6',
       formula: `2+2d6kh`,
       title: 'd6+mod w/ advantage',
     },
     {
-      defaultDie: 'd10',
+      diceType: 'd10',
       formula: `5+2d10kl`,
       title: 'd10+mod w/ disadavantage',
     },
     {
-      defaultDie: 'd10',
+      diceType: 'd10',
       formula: `{2d10r<=2}>=8`,
       title: '2d10 re-roll >2s, DC8',
     },
     {
-      defaultDie: 'd6',
+      diceType: 'd6',
       formula: `{4d6kh3....6}`,
       title: 'Roll Stats',
     },
     {
-      defaultDie: 'd20',
+      diceType: 'd20',
       formula: `{5+2d20kl...10}>=15`,
       title: 'multi d20+mod w/ dis, DC 15',
     },

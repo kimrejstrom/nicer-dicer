@@ -21,7 +21,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
 
   const renderedPresets = presets.map((preset, index) => {
     let icon;
-    switch (preset.defaultDie) {
+    switch (preset.diceType) {
       case 'd20':
         icon = d20;
         break;
@@ -57,16 +57,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
                   toggleModal({
                     visible: true,
                     title: 'Edit Preset',
-                    content: (
-                      <PresetForm
-                        existingInputs={{
-                          title: preset.title,
-                          formula: preset.formula,
-                          dice: preset.defaultDie,
-                          id: index,
-                        }}
-                      />
-                    ),
+                    content: <PresetForm existingPreset={preset} id={index} />,
                   }),
                 )
               }

@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addPreset, updatePreset } from 'features/presets/presetsSlice';
 import { Preset } from 'features/presets/presetsSlice';
-import { useForm } from 'utils/customHooks';
+import { useForm, InputsFor } from 'utils/customHooks';
 import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
+import { toggleModal } from 'components/Modal/modalSlice';
 
 export const PresetForm: React.FC<{
-  existingInputs?: any;
-}> = ({ existingInputs }) => {
+  existingPreset?: Preset;
+  id?: number;
+}> = ({ existingPreset, id }) => {
   const dispatch = useDispatch();
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
@@ -20,28 +22,39 @@ export const PresetForm: React.FC<{
       dice.roll(inputs.formula);
 
       const newPreset: Preset = {
-        defaultDie: inputs.dice,
+        diceType: inputs.diceType,
         formula: inputs.formula,
         title: inputs.title,
       };
       setError(undefined);
-      if (existingInputs) {
+      if (existingPreset) {
         setSuccess('Preset Updated');
-        dispatch(updatePreset({ preset: newPreset, id: existingInputs.id }));
+        dispatch(updatePreset({ preset: newPreset, id: id! }));
       } else {
         setSuccess('Preset Added');
         dispatch(addPreset(newPreset));
       }
+      // Close modal
+      setTimeout(() => {
+        dispatch(toggleModal({ visible: false }));
+      }, 1000);
     } catch (error) {
       setError(error);
       setSuccess(undefined);
     }
   };
 
+  const existingInputs: InputsFor<Preset> = {
+    title: existingPreset?.title,
+    formula: existingPreset?.formula,
+    diceType: existingPreset?.diceType,
+  };
+
   const { inputs, handleInputChange, handleSubmit } = useForm(
     submitPreset,
     existingInputs,
   );
+
   return (
     <div className="flex flex-col items-center">
       <div className="text-lg text-green-300">{success}</div>
@@ -73,8 +86,8 @@ export const PresetForm: React.FC<{
           <div className="inline-block relative w-full">
             <select
               className="relative w-full appearance-none text-lg font-mono flex bg-primary-dark text-white text-center font-bold py-2 px-4 rounded border border-yellow-700 focus:outline-none focus:border-yellow-400"
-              name="dice"
-              value={inputs?.dice || ''}
+              name="diceType"
+              value={inputs?.diceType}
               onChange={handleInputChange}
             >
               <option value="d4">d4</option>

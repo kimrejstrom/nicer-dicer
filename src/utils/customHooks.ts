@@ -7,6 +7,8 @@ export const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 };
 
+export type InputsFor<T> = { [key in keyof T]: string | number | undefined };
+
 // A custom hook to handle controlled forms
 export const useForm = (callback: () => void, existingInputs?: any) => {
   const [inputs, setInputs] = useState(existingInputs);
