@@ -68,11 +68,11 @@ pre {
 }
 
 .mdx a {
-  @apply underline
+  @apply underline;
 }
 
 .mdx a:hover {
-  @apply text-yellow-200
+  @apply text-yellow-200;
 }
 
 .mdx code {
@@ -83,13 +83,15 @@ pre {
   @apply text-sm bg-primary-dark text-yellow-300;
 }
 
-/* Spinners */
+/* Spinner */
 
 .spinner {
   @apply border-4 rounded-full border-yellow-300 w-16 h-16;
   border-top-color: theme('colors.yellow.500');
   animation: spin 1s linear infinite;
 }
+
+/* Nicer Dicer */
 
 .arrow-down {
   width: 0;
@@ -105,6 +107,17 @@ pre {
 
 .text-shadow {
   text-shadow: 0 0px 8px rgba(0, 0, 0, 0.8), 0 0px 14px rgba(0, 0, 0, 0.8);
+}
+
+.hidden-scroll {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.hidden-scroll::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
 }
 
 @tailwind components;

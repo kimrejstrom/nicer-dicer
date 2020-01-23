@@ -138,7 +138,7 @@ export const PresetList: React.FC<{ presets: Preset[] }> = ({ presets }) => {
           />
         </div>
       </div>
-      <div className="h-40 mt-4 flex flex-wrap justify-between overflow-scroll">
+      <div className="h-40 mt-4 flex flex-wrap justify-between hidden-scroll">
         {renderedPresets.reverse()}
       </div>
     </>
