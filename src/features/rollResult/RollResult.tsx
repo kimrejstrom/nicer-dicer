@@ -52,7 +52,7 @@ export const RollResult: React.FC<{ result?: DiceResult }> = ({ result }) => {
             </div>
           </div>
           <details className="m-auto text-center">
-            <summary>View roll</summary>
+            <summary className="focus:outline-none">View roll</summary>
             <div className="tracking-tight font-mono p-4 bg-secondary-dark rounded">
               {parseExpression(result.renderedExpression)}
             </div>
