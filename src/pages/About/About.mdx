@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 # Nicer Dicer Info
 
-Nicer Dicer uses the [`dice-typescript`](https://github.com/trwolfe13/dice-typescript) package as it's dice engine. Dice-Typescript is based on the Roll20 dice specification that can be found on the [Roll20 Wiki](https://wiki.roll20.net/Dice_Reference).
+Nicer Dicer uses the [`dice-typescript`](https://github.com/kimrejstrom/dice-typescript) package as it's dice engine. Dice-Typescript is based on the Roll20 dice specification that can be found on the [Roll20 Wiki](https://wiki.roll20.net/Dice_Reference).
 
 There are a number of presets available on the dice roller <Link className="text-yellow-400" to="/roller">page</Link> that you can easily copy and modify to get started.
 
@@ -147,7 +147,7 @@ Failure checks on groups work just like success checks.
 
 In addition to the above syntax rules, some slightly more complicated variations are also available. For example, you can roll a variable number of dice using an expression similar to the following:
 
-`4d4)d20`
+`(4d4)d20`
 
 ### Conditional Operators
 
@@ -165,7 +165,7 @@ The above will roll 10 disadvantaged saving throws, reporting successes for thos
 
 Using the allowed syntax, it is possible to request a fractional number of dice to be rolled. Take the following example:
 
-`2 / 5)d6`
+`(2 / 5)d6`
 
 In this instance, the number of dice to be rolled will be rounded to the nearest integer (2.5 gets rounded up to 3).
 

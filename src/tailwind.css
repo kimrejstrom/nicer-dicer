@@ -67,6 +67,14 @@ pre {
   @apply mt-2;
 }
 
+.mdx a {
+  @apply underline
+}
+
+.mdx a:hover {
+  @apply text-yellow-200
+}
+
 .mdx code {
   @apply bg-primary-dark text-yellow-300;
 }
