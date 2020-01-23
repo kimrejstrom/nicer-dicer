@@ -1,4 +1,4 @@
-![Actions Status](https://github.com/kimrejstrom/nicer-dicer/workflows/node-npm-ci/badge.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d18fe0792812496984ca16dbb95ecc6f)](https://www.codacy.com/manual/kimrejstrom/nicer-dicer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kimrejstrom/nicer-dicer&amp;utm_campaign=Badge_Grade)
+![Actions Status](https://github.com/kimrejstrom/nicer-dicer/workflows/node-npm-ci/badge.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d18fe0792812496984ca16dbb95ecc6f)](https://www.codacy.com/manual/kimrejstrom/nicer-dicer?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=kimrejstrom/nicer-dicer&amp;utm_campaign=Badge_Grade) [![PWA Shields](https://www.pwa-shields.com/1.0.0/series/classic/solid/gray.svg)](https://nicer-dicer.netlify.com/)
 
 # [Nicer Dicer](https://nicer-dicer.netlify.com/) - The Ultimate RPG Dice Roller
 

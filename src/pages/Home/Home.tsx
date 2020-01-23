@@ -42,7 +42,7 @@ export const Home: React.FC = () => {
           </svg>
           Check for updates
         </button>
-        <div className="fixed max-w-xs w-full bottom-0 mb-32 font-sans text-sm">
+        <div className="w-full mb-12 mt-24 font-sans text-sm">
           <div className="flex justify-around">
             <a
               href="https://github.com/kimrejstrom/nicer-dicer"
