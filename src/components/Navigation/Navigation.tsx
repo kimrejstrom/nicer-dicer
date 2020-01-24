@@ -15,7 +15,7 @@ export const Navigation: React.FC = () => {
         >
           <img src={d20} className="w-8" alt="logo" />
         </Link>
-        <Link to="/about" className="p-4">
+        <Link to="/info" className="p-4">
           <img src="https://icon.now.sh/info_outline/24/fefcbf" alt="info" />
         </Link>
       </nav>

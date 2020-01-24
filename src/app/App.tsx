@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navigation } from 'components/Navigation/Navigation';
 import { Header } from 'components/Header/Header';
 import { Home } from 'pages/Home/Home';
-import { About } from 'pages/About/About';
+import { Info } from 'pages/Info/Info';
 import { Roller } from 'pages/Roller/Roller';
 import { useServiceWorker, IServiceWorkerContext } from 'useServiceWorker';
 import Button from 'components/Button/Button';
@@ -11,6 +11,7 @@ import { Modal } from 'components/Modal/Modal';
 import { useSelector } from 'react-redux';
 import { RootState } from 'app/rootReducer';
 import { withTracker, initializeGA } from 'utils/analyticsTracker';
+import { About } from 'pages/About/About';
 
 initializeGA();
 
@@ -54,6 +55,7 @@ const App: React.FC = () => {
             )}
             <Header />
             <Switch>
+              <Route path="/info" component={withTracker(Info)} />
               <Route path="/about" component={withTracker(About)} />
               <Route path="/roller" component={withTracker(Roller)} />
               <Route path="/" component={withTracker(Home)} />
