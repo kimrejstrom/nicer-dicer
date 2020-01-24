@@ -4,7 +4,7 @@ import d20 from 'images/logo.svg';
 
 export const Navigation: React.FC = () => {
   return (
-    <header className="h-20 max-w-lg fixed bottom-0 w-full border-t-2 border-yellow-700 bg-secondary-dark">
+    <header className="h-20 max-w-lg fixed bottom-0 w-full border-t-2 border-yellow-700 bg-secondary-dark sm:rounded-b-lg">
       <nav className="flex align-center items-center justify-between flex-wrap px-4">
         <Link to="/" className="p-4">
           <img src="https://icon.now.sh/home/24/fefcbf" alt="home" />

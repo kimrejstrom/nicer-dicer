@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 export const Header: React.FC = () => {
   return (
     <div className="container mx-auto">
-      <div className="flex justify-center items-center">
-        <div className="w-full absolute top-0 h-1 bg-yellow-700"></div>
+      <div className="flex justify-center items-center border-t-4 border-yellow-700 sm:rounded-t-lg">
         <h1 className="text-center mt-4 mr-6">Nicer</h1>
         <div className="absolute arrow-down shape-shadow"></div>
         <Link className="w-12" to="/roller">
