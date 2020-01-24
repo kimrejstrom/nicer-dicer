@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ReactGA from 'react-ga';
 import { Dice } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
@@ -38,6 +39,11 @@ export const RollInput = () => {
       setResult(rollResult);
       setError(undefined);
       dispatch(addRoll(currentRoll));
+      ReactGA.event({
+        category: 'Roll',
+        action: 'Roll Submit',
+        transport: 'beacon',
+      });
       history.push(`/roller?roll=${encodeURIComponent(currentRoll)}`);
     } catch (error) {
       setError(error);

@@ -10,6 +10,9 @@ import Button from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
 import { useSelector } from 'react-redux';
 import { RootState } from 'app/rootReducer';
+import { withTracker, initializeGA } from 'utils/analyticsTracker';
+
+initializeGA();
 
 const App: React.FC = () => {
   const {
@@ -51,15 +54,9 @@ const App: React.FC = () => {
             )}
             <Header />
             <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/roller">
-                <Roller />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
+              <Route path="/about" component={withTracker(About)} />
+              <Route path="/roller" component={withTracker(Roller)} />
+              <Route path="/" component={withTracker(Home)} />
             </Switch>
             <Modal title={title} content={content} />
           </main>
