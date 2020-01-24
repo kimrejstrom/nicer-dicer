@@ -23,47 +23,49 @@ const App: React.FC = () => {
   );
 
   return (
-    <div className={`flex flex-col min-h-screen theme`}>
-      <Router>
-        {/* A <Switch> looks through its children <Route>s and
+    <div className="flex flex-col min-h-screen theme desktop-bg">
+      <div className="m-auto bg-primary-dark w-full max-w-lg shadow-xxl relative min-h-screen">
+        <Router>
+          {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <main className="mb-20 bg-gray-100 text-yellow-100 bg-primary-dark flex-grow">
-          {isUpdateAvailable && (
-            <div className="fixed w-full bottom-0 mb-20">
-              <div
-                className="p-2 bg-yellow-800 items-center text-yellow-100 leading-none flex justify-center items-center"
-                role="alert"
-              >
-                <span className="flex rounded-full bg-primary-dark px-2 py-1 text-xs font-bold mr-3">
-                  New
-                </span>
-                <div>
-                  A new version is available
-                  <Button
-                    className="hover:bg-primary-dark bg-secondary-dark text-yellow-100 py-1 px-2 border border-yellow-600 rounded ml-4"
-                    onClick={updateAssets}
-                    title="Update now"
-                  />
+          <main className="mb-20 bg-gray-100 text-yellow-100 bg-primary-dark flex-grow">
+            {isUpdateAvailable && (
+              <div className="max-w-lg fixed w-full bottom-0 mb-20">
+                <div
+                  className="p-2 bg-yellow-800 items-center text-yellow-100 leading-none flex justify-center items-center"
+                  role="alert"
+                >
+                  <span className="flex rounded-full bg-primary-dark px-2 py-1 text-xs font-bold mr-3">
+                    New
+                  </span>
+                  <div>
+                    A new version is available
+                    <Button
+                      className="hover:bg-primary-dark bg-secondary-dark text-yellow-100 py-1 px-2 border border-yellow-600 rounded ml-4"
+                      onClick={updateAssets}
+                      title="Update now"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-          <Header />
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/roller">
-              <Roller />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-          <Modal title={title} content={content} />
-        </main>
-        <Navigation />
-      </Router>
+            )}
+            <Header />
+            <Switch>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/roller">
+                <Roller />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+            <Modal title={title} content={content} />
+          </main>
+          <Navigation />
+        </Router>
+      </div>
     </div>
   );
 };

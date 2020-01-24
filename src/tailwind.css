@@ -29,6 +29,11 @@ body.modal-active {
   background-image: url(./images/background.svg);
 }
 
+.desktop-bg {
+  background-color: #393232;
+  background-image: url(./images/background-desktop.svg);
+}
+
 /* Headings */
 .heading {
   @apply font-bold tracking-tighter text-yellow-200;
@@ -103,6 +108,10 @@ pre {
 
 .shape-shadow {
   filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+}
+
+.shadow-xxl {
+  box-shadow: 0px 0px 40px 15px rgba(0, 0, 0, 0.5);
 }
 
 .text-shadow {
