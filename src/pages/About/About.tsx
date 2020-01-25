@@ -14,7 +14,16 @@ export const About: React.FC = () => (
       />
       <p className="mx-auto w-full m-6">
         This is an open source, mobile-first dice roller project built using
-        React and Typescript.
+        React and Typescript. See{' '}
+        <a
+          href="https://github.com/kimrejstrom/nicer-dicer"
+          target="_blank"
+          className="underline hover:text-yellow-200"
+          rel="noopener noreferrer"
+        >
+          Github
+        </a>{' '}
+        for details.
       </p>
       <p>
         It is a fully fledged Progressive Web App (PWA) sand can thus be added
@@ -30,7 +39,7 @@ export const About: React.FC = () => (
           <a
             href="https://github.com/kimrejstrom/nicer-dicer"
             target="_blank"
-            className="flex items-center"
+            className="flex items-center underline hover:text-yellow-200"
             rel="noopener noreferrer"
           >
             <svg
@@ -48,6 +57,7 @@ export const About: React.FC = () => (
           <a
             href="https://github.com/kimrejstrom/nicer-dicer/issues/new/choose"
             target="_blank"
+            className="underline hover:text-yellow-200"
             rel="noopener noreferrer"
           >
             <svg
@@ -61,7 +71,7 @@ export const About: React.FC = () => (
             </svg>
             Report a problem
           </a>
-          <Link to="/about">
+          <Link className="underline hover:text-yellow-200" to="/about">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

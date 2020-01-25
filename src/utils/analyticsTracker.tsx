@@ -45,7 +45,7 @@ export const initializeGA = () => {
           ReactGA.timing({
             category: 'App Render Performace',
             variable: entry.name,
-            value: entry.duration,
+            value: entry.duration + 0.01, // Bump, as 0 throws a warning,
           });
 
           break;
@@ -78,14 +78,8 @@ export const initializeGA = () => {
 const logPageView = (history: any, options: FieldsObject) => {
   history.listen((location: Location) => {
     const page = location.pathname || window.location.pathname;
-    if (page.includes('/roller')) {
-      const rootURL = page.split('/')[1];
-      const pageHit = `/${rootURL}`;
-      ReactGA.pageview(pageHit);
-    } else {
-      ReactGA.set({ page, ...options });
-      ReactGA.pageview(page);
-    }
+    ReactGA.set({ page, ...options });
+    ReactGA.pageview(page);
   });
 };
 
