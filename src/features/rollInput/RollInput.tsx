@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactGA from 'react-ga';
-import { Dice } from 'vendor/nicer-dicer-engine';
+import { Dice, DiceResult } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import { useHistory } from 'react-router-dom';
 export const RollInput = () => {
   const dispatch = useDispatch();
 
-  const [result, setResult] = useState();
+  const [result, setResult] = useState<DiceResult>();
   const [error, setError] = useState();
 
   // Get currentRoll from Redux
@@ -77,7 +77,7 @@ export const RollInput = () => {
             </div>
           ) : (
             <>
-              <RollResult result={result} />
+              {result && <RollResult result={result} />}
               <RollList />
             </>
           )}

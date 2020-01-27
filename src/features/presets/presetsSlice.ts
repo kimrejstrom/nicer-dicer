@@ -35,7 +35,7 @@ export const presetsInitialState: PresetsState = {
     },
     {
       diceType: 'd6',
-      formula: `{4d6kh3....6}`,
+      formula: `{4d6kh3...6}`,
       title: 'Roll Stats',
     },
     {
