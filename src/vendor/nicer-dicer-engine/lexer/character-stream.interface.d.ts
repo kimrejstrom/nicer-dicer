@@ -3,4 +3,5 @@ export interface CharacterStream {
     getCurrentPosition(): number;
     getNextCharacter(): string;
     peekNextCharacter(): string;
+    peekXCharactersForward(i: number): string;
 }

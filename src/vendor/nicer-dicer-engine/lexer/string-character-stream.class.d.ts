@@ -7,4 +7,5 @@ export declare class StringCharacterStream implements CharacterStream {
     getNextCharacter(): string;
     getCurrentCharacter(): string;
     peekNextCharacter(): string;
+    peekXCharactersForward(i: number): string;
 }

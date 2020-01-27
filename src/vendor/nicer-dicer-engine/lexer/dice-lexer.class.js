@@ -60,14 +60,22 @@ var DiceLexer = /** @class */ (function () {
     DiceLexer.prototype.parseNumber = function () {
         var buffer = this.stream.getCurrentCharacter();
         var nextChar = this.stream.peekNextCharacter();
-        while (nextChar === '.' || this.numCharRegex.test(nextChar)) {
-            buffer += this.stream.getNextCharacter();
-            nextChar = this.stream.peekNextCharacter();
-            if (nextChar === '.') {
-                break;
-            }
+        var nextNextChar = this.stream.peekXCharactersForward(2);
+        if (nextNextChar === '.') {
+            // Ellipsis
+            return this.createToken(token_type_enum_1.TokenType.Number, buffer);
         }
-        return this.createToken(token_type_enum_1.TokenType.Number, buffer);
+        else {
+            // float
+            while (nextChar === '.' || this.numCharRegex.test(nextChar)) {
+                buffer += this.stream.getNextCharacter();
+                nextChar = this.stream.peekNextCharacter();
+                if (nextChar === '.') {
+                    break;
+                }
+            }
+            return this.createToken(token_type_enum_1.TokenType.Number, buffer);
+        }
     };
     DiceLexer.prototype.parseEllipsis = function () {
         for (var x = 0; x < 2; x++) {

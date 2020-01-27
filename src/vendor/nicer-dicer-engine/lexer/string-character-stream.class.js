@@ -22,10 +22,16 @@ var StringCharacterStream = /** @class */ (function () {
         return this.input[this.index];
     };
     StringCharacterStream.prototype.peekNextCharacter = function () {
-        if (this.index >= this.input.length) {
+        if (this.index + 1 >= this.input.length) {
             return null;
         }
         return this.input[this.index + 1];
+    };
+    StringCharacterStream.prototype.peekXCharactersForward = function (i) {
+        if (this.index + i >= this.input.length) {
+            return null;
+        }
+        return this.input[this.index + i];
     };
     return StringCharacterStream;
 }());
