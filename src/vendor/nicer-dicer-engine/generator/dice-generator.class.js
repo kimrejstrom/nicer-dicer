@@ -232,7 +232,15 @@ var DiceGenerator = /** @class */ (function () {
             return operator + this.generate(expression.getChild(0));
         }
         else {
-            return this.generate(expression.getChild(0)) + ' ' + operator + ' ' + this.generate(expression.getChild(1));
+            return (this.generate(expression.getChild(0)) +
+                ' ' +
+                operator +
+                ' ' +
+                this.generate(expression.getChild(1)) +
+                ' | Difficulty: ' +
+                operator +
+                ' ' +
+                this.generate(expression.getChild(1)));
         }
     };
     DiceGenerator.prototype.generateCommaList = function (expression) {

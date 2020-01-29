@@ -2,10 +2,18 @@ import React from 'react';
 import { DiceResult } from 'vendor/nicer-dicer-engine';
 
 export const RollResult: React.FC<{ result: DiceResult }> = ({ result }) => {
-  // Parse DiceResult
-  const renderedResult = result.renderedExpression.split('}').filter(e => e);
-  const rolls = renderedResult[0].replace(/[{}]/g, '').split(';');
-  const hasTarget = renderedResult.length > 1;
+  // Parse Difficulty
+  const renderedResult = result.renderedExpression.split('|').filter(e => e);
+  const difficulty = {
+    hasDifficulty: renderedResult.length > 1,
+    expression: renderedResult[1],
+  };
+  // Parse Rolls
+  const rolls = renderedResult[0]
+    .split('}')
+    .filter(e => e)[0]
+    .replace(/[{}]/g, '')
+    .split(';');
 
   // Render
   return (
@@ -15,7 +23,7 @@ export const RollResult: React.FC<{ result: DiceResult }> = ({ result }) => {
           <div className="p-2">
             Total: <b className="text-2xl">{result.total}</b>
           </div>
-          {hasTarget && (
+          {difficulty.hasDifficulty && (
             <>
               <div className="p-2">
                 Successes:{' '}
@@ -32,10 +40,10 @@ export const RollResult: React.FC<{ result: DiceResult }> = ({ result }) => {
         <details className="m-auto text-center">
           <summary className="focus:outline-none">View roll</summary>
           <div className="tracking-tight font-mono p-4 bg-secondary-dark rounded">
-            {hasTarget && (
+            {difficulty.hasDifficulty && (
               <div key="target" className="font-bold mb-4">
                 <span className="border-b-2 border-yellow-200">
-                  Target: {renderedResult[1]}
+                  {difficulty.expression}
                 </span>
               </div>
             )}
