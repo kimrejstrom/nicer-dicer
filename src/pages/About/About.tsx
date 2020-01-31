@@ -26,8 +26,8 @@ export const About: React.FC = () => (
         for details.
       </p>
       <p>
-        It is a fully fledged Progressive Web App (PWA) sand can thus be added
-        to your phone's homescreen as a fully functioning offline app.
+        It is a fully fledged Progressive Web App (PWA) and can thus be added to
+        your phone's homescreen as a fully functioning offline app.
       </p>
       <div className="mt-6 font-bold">Available soon on:</div>
       <div className="flex items-center justify-center mt-2">
@@ -71,7 +71,7 @@ export const About: React.FC = () => (
             </svg>
             Report a problem
           </a>
-          <Link className="underline hover:text-yellow-200" to="/about">
+          <Link className="underline hover:text-yellow-200" to="/info">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

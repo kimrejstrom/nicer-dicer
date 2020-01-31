@@ -17,7 +17,7 @@ export const Home: React.FC = () => {
           box and press enter. <br />
           Nicer Dicer features support for a wide array of dice mechanics. For
           the complete list of available commands, visit the{' '}
-          <Link className="text-yellow-500" to="/about">
+          <Link className="text-yellow-500" to="/info">
             Help
           </Link>{' '}
           page.
