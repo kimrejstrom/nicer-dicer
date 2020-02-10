@@ -15,7 +15,7 @@ This repository contains the frontend UI as well as a vendored version of the di
 
 It is a fully fledged Progressive Web App (PWA) bootstrapped using the [`rr-starter-kit`](https://github.com/kimrejstrom/rr-starter-kit) (see link for details), and can thus be added to your phone's homescreen as a fully functioning offline app.
 
-<img src="assets/pwa.png" width="500">
+<img src="assets/pwa.gif" width="500">
 
 ## Screenshots
 <img src="assets/screenshot.gif" width="500">
