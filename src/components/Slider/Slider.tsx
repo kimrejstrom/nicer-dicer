@@ -21,7 +21,8 @@ export const Slider: React.FC<ISlider> = ({ slides }) => {
       <div className="slider-nav">
         {slides.map((_, index) => (
           <a
-            className="bg-primary-dark w-4 h-4 inline-flex items-center justify-center rounded-full mr-1 mb-2 mt-4"
+            key={index}
+            className="bg-white opacity-25 w-3 h-3 inline-flex items-center justify-center rounded-full mr-2 mb-2 mt-4"
             href={`#slide-${index}`}
           >
             {' '}
