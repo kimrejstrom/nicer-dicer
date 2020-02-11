@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactGA from 'react-ga';
+import { useHistory } from 'react-router-dom';
 import { Dice, DiceResult } from 'vendor/nicer-dicer-engine';
 import { Alert } from 'components/Alert/Alert';
 import { RollResult } from 'features/rollResult/RollResult';
@@ -8,12 +9,22 @@ import { addRoll, setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import { RollList } from 'features/rollList/RollList';
 import { RootState } from 'app/rootReducer';
 import { useQuery } from 'utils/customHooks';
-import { useHistory } from 'react-router-dom';
+import d20Loading from 'images/d20loading.webp';
+import slide_01 from 'images/helper_slide1.png';
+import slide_02 from 'images/helper_slide2.png';
+import slide_03 from 'images/helper_slide3.png';
+import slide_04 from 'images/helper_slide4.png';
+import slide_05 from 'images/helper_slide5.png';
+import slide_06 from 'images/helper_slide6.png';
+import slide_07 from 'images/helper_slide7.png';
+import { toggleModal } from 'components/Modal/modalSlice';
+import { Slider } from 'components/Slider/Slider';
 
 export const RollInput = () => {
   const dispatch = useDispatch();
 
   const [result, setResult] = useState<DiceResult>();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   // Get currentRoll from Redux
@@ -29,13 +40,16 @@ export const RollInput = () => {
     }
   });
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const dice = new Dice(undefined, undefined, {
       renderExpressionDecorators: true,
     });
     try {
       const rollResult = dice.roll(currentRoll);
+      setLoading(true);
+      await new Promise(r => setTimeout(r, 2000));
+      setLoading(false);
       setResult(rollResult);
       setError(undefined);
       dispatch(addRoll(currentRoll));
@@ -56,7 +70,42 @@ export const RollInput = () => {
       <div className="flex flex-col items-center">
         <form className="text-center w-full" onSubmit={handleSubmit}>
           <label className="text-3xl">
-            Enter formula
+            <span>
+              Enter formula{' '}
+              <button
+                onClick={() =>
+                  dispatch(
+                    toggleModal({
+                      visible: true,
+                      title: '',
+                      content: (
+                        <Slider
+                          slides={[
+                            <img src={slide_01} alt="slide1" />,
+                            <img src={slide_02} alt="slide2" />,
+                            <img src={slide_03} alt="slide3" />,
+                            <img src={slide_04} alt="slide4" />,
+                            <img src={slide_05} alt="slide5" />,
+                            <img src={slide_06} alt="slide6" />,
+                            <img src={slide_07} alt="slide7" />,
+                          ]}
+                        />
+                      ),
+                    }),
+                  )
+                }
+              >
+                <svg
+                  className="inline-block text-white fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                >
+                  <path d="M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM10.59 8.59a1 1 0 1 1-1.42-1.42 4 4 0 1 1 5.66 5.66l-2.12 2.12a1 1 0 1 1-1.42-1.42l2.12-2.12A2 2 0 0 0 10.6 8.6zM12 18a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </svg>
+              </button>
+            </span>
             <input
               className="text-lg w-full appearance-none text-sm font-mono flex bg-secondary-dark text-white text-center font-bold py-2 px-4 rounded mt-2 border border-yellow-700 focus:outline-none focus:border-yellow-400"
               type="text"
@@ -70,6 +119,11 @@ export const RollInput = () => {
             value="Roll"
           />
         </form>
+        {loading && (
+          <div>
+            <img src={d20Loading} alt="Loading animation" />
+          </div>
+        )}
         <div className="w-full text-wrap">
           {error ? (
             <div className="font-mono mb-6 m-auto">

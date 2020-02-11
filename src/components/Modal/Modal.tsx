@@ -24,7 +24,7 @@ export const Modal: React.FC<IModal> = ({ title, content }) => {
           className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
         >
           <svg
-            className="fill-current text-white"
+            className="fill-current text-white opacity-50"
             xmlns="http://www.w3.org/2000/svg"
             width="18"
             height="18"
@@ -42,7 +42,7 @@ export const Modal: React.FC<IModal> = ({ title, content }) => {
               className="modal-close cursor-pointer z-50"
             >
               <svg
-                className="fill-current text-white"
+                className="fill-current text-white opacity-50"
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
                 height="18"

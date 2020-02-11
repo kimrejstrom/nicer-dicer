@@ -120,6 +120,7 @@ pre {
 
 .hidden-scroll {
   overflow-y: scroll;
+  overflow-x: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
@@ -127,6 +128,24 @@ pre {
   /* WebKit */
   width: 0;
   height: 0;
+}
+
+/* Slider */
+
+.slider {
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.slides > div {
+  scroll-snap-align: start;
 }
 
 @tailwind components;
