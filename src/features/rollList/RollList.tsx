@@ -10,7 +10,7 @@ export const RollList: React.FC = () => {
   // Render
   return (
     <details className="m-auto text-center">
-      <summary className="focus:outline-none">View history</summary>
+      <summary>View history</summary>
       <div className="rounded bg-secondary-dark mt-4 p-4">
         <div className="text-center text-xl text-yellow-200 mb-2">
           Previous Rolls
