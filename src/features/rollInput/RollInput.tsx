@@ -74,6 +74,7 @@ export const RollInput = () => {
             <span>
               Enter formula{' '}
               <button
+                type="button"
                 onClick={() =>
                   dispatch(
                     toggleModal({
@@ -97,7 +98,7 @@ export const RollInput = () => {
                 }
               >
                 <svg
-                  className="inline-block text-white fill-current"
+                  className="text-white fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   width="24"
@@ -118,6 +119,7 @@ export const RollInput = () => {
             className="hover:bg-secondary-dark bg-transparent w-full text-2xl text-white py-1 mt-2 px-4 border border-yellow-700 rounded"
             type="submit"
             value="Roll"
+            disabled={loading}
           />
         </form>
         <div className="w-full text-wrap">
