@@ -16,8 +16,8 @@ const Loader: React.FC = () => {
           style={{
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             fillRule: 'evenodd',
             animationDelay: '0.4s',
           }}
@@ -28,8 +28,8 @@ const Loader: React.FC = () => {
           style={{
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             animationDelay: '0.4s',
           }}
         />
@@ -39,8 +39,8 @@ const Loader: React.FC = () => {
           style={{
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             fillRule: 'evenodd',
             animationDelay: '0.6s',
           }}
@@ -51,8 +51,8 @@ const Loader: React.FC = () => {
           style={{
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             animationDelay: '0.6s',
           }}
         />
@@ -63,8 +63,8 @@ const Loader: React.FC = () => {
             animationDelay: '0.8s',
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
           }}
         />
         <polygon
@@ -74,8 +74,8 @@ const Loader: React.FC = () => {
             animationDelay: '0.8s',
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             fillRule: 'evenodd',
           }}
         />
@@ -86,8 +86,8 @@ const Loader: React.FC = () => {
             animationDelay: '0.2s',
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
           }}
         />
         <polygon
@@ -97,8 +97,8 @@ const Loader: React.FC = () => {
             animationDelay: '0.2s',
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
           }}
         />
         <polygon
@@ -108,8 +108,8 @@ const Loader: React.FC = () => {
             animationDelay: '0.2s',
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
           }}
         />
         <polygon
@@ -118,8 +118,8 @@ const Loader: React.FC = () => {
           style={{
             fill: '#252020',
             stroke: '#fefcbf',
-            strokeMiterlimit: 10,
-            strokeWidth: '3px',
+            strokeMiterlimit: 0,
+            strokeWidth: '4px',
             fillRule: 'evenodd',
           }}
         />
