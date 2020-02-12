@@ -89,15 +89,16 @@ pre {
 }
 
 /* Spinner */
+.spin {
+  animation: spin 1s linear infinite;
+}
 
 .spinner {
   @apply border-4 rounded-full border-yellow-300 w-16 h-16;
   border-top-color: theme('colors.yellow.500');
-  animation: spin 1s linear infinite;
 }
 
 /* Nicer Dicer */
-
 .arrow-down {
   width: 0;
   height: 0;
@@ -124,21 +125,14 @@ pre {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
+
 .hidden-scroll::-webkit-scrollbar {
-  /* WebKit */
   width: 0;
   height: 0;
 }
 
 /* Slider */
-
-.slider {
-  overflow: hidden;
-}
-
 .slides {
-  display: flex;
-  overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -146,6 +140,25 @@ pre {
 
 .slides > div {
   scroll-snap-align: start;
+}
+
+.slider::before {
+  @apply absolute left-0 h-8 w-8 -mt-8 bg-black opacity-50 rounded-full text-white text-2xl leading-8;
+  content: '<';
+  top: 50%;
+  z-index: 1;
+}
+
+.slider::after {
+  @apply absolute right-0 h-8 w-8 -mt-8 bg-black opacity-50 rounded-full text-white text-2xl leading-8;
+  content: '>';
+  top: 50%;
+  z-index: 1;
+}
+
+.breathe {
+  transform-origin: center;
+  animation: breathe 1.6s infinite;
 }
 
 @tailwind components;
@@ -156,5 +169,19 @@ pre {
 @keyframes spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  20% {
+    opacity: 0.5;
+  }
+  33% {
+    transform: scale(0.2);
   }
 }

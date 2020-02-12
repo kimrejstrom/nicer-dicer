@@ -37,26 +37,23 @@ export const RollResult: React.FC<{ result: DiceResult }> = ({ result }) => {
             </>
           )}
         </div>
-        <details className="m-auto text-center">
-          <summary className="focus:outline-none">View roll</summary>
-          <div className="tracking-tight font-mono p-4 bg-secondary-dark rounded">
-            {difficulty.hasDifficulty && (
-              <div key="target" className="font-bold mb-4">
-                <span className="border-b-2 border-yellow-200">
-                  {difficulty.expression}
-                </span>
-              </div>
-            )}
-            <div key="rolls" className="text-center">
-              {rolls.map((roll, index) => (
-                <span key={index}>
-                  {roll}
-                  <br />
-                </span>
-              ))}
+        <div className="m-auto text-center tracking-tight font-mono p-4 bg-secondary-dark rounded">
+          {difficulty.hasDifficulty && (
+            <div key="target" className="font-bold mb-4">
+              <span className="border-b-2 border-yellow-200">
+                {difficulty.expression}
+              </span>
             </div>
+          )}
+          <div key="rolls" className="text-center">
+            {rolls.map((roll, index) => (
+              <span key={index}>
+                {roll}
+                <br />
+              </span>
+            ))}
           </div>
-        </details>
+        </div>
       </div>
     </div>
   );

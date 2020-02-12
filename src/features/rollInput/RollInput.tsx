@@ -9,7 +9,9 @@ import { addRoll, setCurrentRoll } from 'features/rollInput/rollInputSlice';
 import { RollList } from 'features/rollList/RollList';
 import { RootState } from 'app/rootReducer';
 import { useQuery } from 'utils/customHooks';
-import d20Loading from 'images/d20loading.webp';
+import { toggleModal } from 'components/Modal/modalSlice';
+import { Slider } from 'components/Slider/Slider';
+// Assets
 import slide_01 from 'images/helper_slide1.png';
 import slide_02 from 'images/helper_slide2.png';
 import slide_03 from 'images/helper_slide3.png';
@@ -17,8 +19,7 @@ import slide_04 from 'images/helper_slide4.png';
 import slide_05 from 'images/helper_slide5.png';
 import slide_06 from 'images/helper_slide6.png';
 import slide_07 from 'images/helper_slide7.png';
-import { toggleModal } from 'components/Modal/modalSlice';
-import { Slider } from 'components/Slider/Slider';
+import Loader from 'components/Loader/Loader';
 
 export const RollInput = () => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export const RollInput = () => {
     try {
       const rollResult = dice.roll(currentRoll);
       setLoading(true);
-      await new Promise(r => setTimeout(r, 2000));
+      await new Promise(r => setTimeout(r, 1600));
       setLoading(false);
       setResult(rollResult);
       setError(undefined);
@@ -119,11 +120,6 @@ export const RollInput = () => {
             value="Roll"
           />
         </form>
-        {loading && (
-          <div>
-            <img src={d20Loading} alt="Loading animation" />
-          </div>
-        )}
         <div className="w-full text-wrap">
           {error ? (
             <div className="font-mono mb-6 m-auto">
@@ -131,7 +127,8 @@ export const RollInput = () => {
             </div>
           ) : (
             <>
-              {result && <RollResult result={result} />}
+              {loading && <Loader />}
+              {result && !loading && <RollResult result={result} />}
               <RollList />
             </>
           )}
