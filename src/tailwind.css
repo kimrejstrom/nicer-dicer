@@ -31,6 +31,7 @@ body.modal-active {
 
 .desktop-bg {
   background-color: #393232;
+  background-attachment: fixed;
   background-image: url(./images/background-desktop.svg);
 }
 
