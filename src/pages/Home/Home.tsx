@@ -13,10 +13,10 @@ export const Home: React.FC = () => {
         </div>
         <Dice />
         <p className="mx-auto w-full mb-6">
-          The dice roller is very easy to use, simply type in the formula in the
+          The dice roller is very easy to use, simply type in your roll in the
           box and press enter. <br />
-          Nicer Dicer features support for a wide array of dice mechanics. For
-          the complete list of available commands, visit the{' '}
+          Nicer Dicer has support for a wide array of dice mechanics. For the
+          complete list of available commands, visit the{' '}
           <Link className="text-yellow-500" to="/info">
             Help
           </Link>{' '}
