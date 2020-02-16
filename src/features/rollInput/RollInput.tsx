@@ -30,6 +30,7 @@ export const RollInput = () => {
 
   // Get currentRoll from Redux
   const { currentRoll, rolls } = useSelector((state: RootState) => state.rolls);
+  const { animations } = useSelector((state: RootState) => state.settings);
   const query = useQuery();
   const history = useHistory();
 
@@ -48,9 +49,11 @@ export const RollInput = () => {
     });
     try {
       const rollResult = dice.roll(currentRoll);
-      setLoading(true);
-      await new Promise(r => setTimeout(r, 1600));
-      setLoading(false);
+      if (animations) {
+        setLoading(true);
+        await new Promise(r => setTimeout(r, 1600));
+        setLoading(false);
+      }
       setResult(rollResult);
       setError(undefined);
       dispatch(addRoll(currentRoll));
@@ -130,7 +133,7 @@ export const RollInput = () => {
             </div>
           ) : (
             <>
-              {loading && <Loader />}
+              {loading && animations && <Loader />}
               {result && !loading && <RollResult result={result} />}
               <RollList />
             </>

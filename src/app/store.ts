@@ -8,7 +8,7 @@ import rootReducer, { RootState } from './rootReducer';
 const persistConfig = {
   key: 'root',
   storage: localForage,
-  whitelist: ['presets'],
+  whitelist: ['presets', 'settings'],
 };
 
 // Middleware: Redux Persist Persisted Reducer
