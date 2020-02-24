@@ -1,10 +1,10 @@
 import React from 'react';
-import d20 from 'images/d20.svg';
-import d12 from 'images/d12.svg';
-import d10 from 'images/d10.svg';
-import d8 from 'images/d8.svg';
-import d6 from 'images/d6.svg';
-import d4 from 'images/d4.svg';
+import d20 from 'images/d20_blank.svg';
+import d12 from 'images/d12_blank.svg';
+import d10 from 'images/d10_blank.svg';
+import d8 from 'images/d8_blank.svg';
+import d6 from 'images/d6_blank.svg';
+import d4 from 'images/d4_blank.svg';
 
 export const Dice: React.FC = () => {
   return (
