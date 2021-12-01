@@ -12,8 +12,8 @@ export const PresetForm: React.FC<{
   id?: number;
 }> = ({ existingPreset, id }) => {
   const dispatch = useDispatch();
-  const [error, setError] = useState();
-  const [success, setSuccess] = useState();
+  const [error, setError] = useState<any>();
+  const [success, setSuccess] = useState<string>();
 
   const submitPreset = () => {
     const dice = new Dice();
